@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './Signup.css';
+import './signUp.css';
 import { assets } from '../../assets/assets';
 
 const Signup = ({ setShowSignup }) => {
