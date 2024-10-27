@@ -1,6 +1,4 @@
-// Wishlist.js
-import React from 'react';
-import './Wishlist.css';
+import './WishList.css'
 import { assets } from '../../assets/assets';
 
 const Wishlist = ({ wishlistItems, closeWishlist }) => {
