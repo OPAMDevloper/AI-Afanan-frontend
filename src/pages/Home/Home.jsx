@@ -10,17 +10,17 @@ import './Home.css'
 
 const Home = () => {
   return (
- 
+
     <div className="Home">
 
-    <Hero />
-    <HeroTwo />
-    <EmptyComponent />
-    <Intro />
-    <OurValues />
-    <Collections />
-    <Footer />
-    <ViewCanvas />
+      <Hero />
+      <HeroTwo />
+      <EmptyComponent />
+      <Intro />
+      <OurValues />
+      <Collections />
+      <Footer />
+      <ViewCanvas />
     </div>
   )
 }

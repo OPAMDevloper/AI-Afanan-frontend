@@ -8,5 +8,10 @@ export default defineConfig({
     alias: {
       '@': '/src',
     },
+
+    server: {
+      port: Number(process.env.VITE_APP_PORT) || 3004,
+      host: process.env.VITE_APP_HOST || 'localhost'
+    },
   },
 });
