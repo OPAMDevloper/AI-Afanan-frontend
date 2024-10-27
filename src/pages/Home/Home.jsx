@@ -4,7 +4,7 @@ import Hero from '../../components/Hero/Hero'
 import HeroTwo from '../../components/HeroTwo/HeroTwo'
 import EmptyComponent from '../../components/empty/empty'
 import Intro from '../../components/Intro/Intro'
-import ViewCanvas from '../../components/viewCanvas'
+import ViewCanvas from '../../components/viewCanvas.jsx'
 import OurValues from '../../components/OurValue/OurValues'
 import './Home.css'
 
