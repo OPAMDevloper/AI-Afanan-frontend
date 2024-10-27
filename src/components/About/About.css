@@ -1,0 +1,52 @@
+.about-container {
+    position: relative;
+    height: 100vh;
+    min-height: 70vh; /* Adjust as needed */
+    background-image: url('../../assets//About.png');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    will-change: transform, backdrop-filter;
+    
+  }
+
+  .overlay {
+    position: absolute;
+    inset: 0;
+    background-color: rgba(13, 13, 13, 0.889); /* Adjust the transparency if needed */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0 20px;
+    text-align: center;
+}
+  
+  .breadcrumb {
+    height: 80px;
+    background-color: black;
+    color: #fff;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+  }
+  
+  .about-content {
+    max-width: 600px;
+  }
+  
+  .about-content h1 {
+    font-size: 50px;
+    font-weight: 500;
+    margin-bottom: 40px;
+  }
+  
+  .about-content p {
+    font-size: 20px;
+    font-weight: 200;
+  }

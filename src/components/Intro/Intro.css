@@ -1,0 +1,62 @@
+.intro {
+    position: relative;
+    height: 100vh;
+    min-height: 70vh; /* Adjust as needed */
+    background-image: url('../../assets/AImage.png');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    will-change: transform, backdrop-filter;
+}
+
+.overlay {
+    position: absolute;
+    inset: 0;
+    background-color: rgba(13, 13, 13, 0.889); /* Adjust the transparency if needed */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0 20px;
+    text-align: center;
+}
+
+.intro-title {
+    font-size: 3rem;
+    color: #AB572D; /* Orange-like color */
+    margin-bottom: 20px;
+    font-weight: 400;
+}
+
+.intro-description {
+    font-size: 1.25rem;
+    line-height: 1.8;
+    max-width: 800px;
+}
+
+/* Media query for responsiveness */
+@media (max-width: 1024px) {
+    .intro-title {
+        font-size: 2.5rem; /* Adjust title font size for smaller screens */
+        margin-bottom: 15px; /* Reduce margin */
+    }
+
+    .intro-description {
+        font-size: 1rem; /* Adjust description font size for smaller screens */
+        line-height: 1.5; /* Reduce line height for better readability */
+        max-width: 90%; /* Allow for more width on smaller screens */
+    }
+}
+
+@media (max-width: 768px) {
+    .intro-title {
+        font-size: 2rem; /* Further reduce title font size for mobile screens */
+    }
+
+    .intro-description {
+        font-size: 0.9rem; /* Further reduce description font size for mobile screens */
+    }
+}

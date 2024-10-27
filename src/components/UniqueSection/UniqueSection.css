@@ -1,0 +1,53 @@
+.unique-section {
+    background-color: #000000;
+    color: #f2f2f2;
+    padding: 40px;
+    text-align: center;
+  }
+  
+  .unique-section h2 {
+    color: #AB572D;
+    margin-bottom: 40px;
+    font-size: 32px;
+    font-weight: 500;
+  }
+  
+  .content-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    text-align: left;
+    gap: 20px;
+  }
+  
+  .content-block {
+    flex: 1;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .content-block h3 {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+  
+  .content-block p {
+    font-size: 20px;
+    font-weight: 100;
+    line-height: 1.6;
+ 
+  }
+  
+  .closing-text, .closing-signature {
+    margin-top: 40px;
+    font-size: 18px;
+    line-height: 1.8;
+    text-align: left;
+  }
+  
+  .closing-signature {
+    font-style: italic;
+    margin-top: 20px;
+  }
