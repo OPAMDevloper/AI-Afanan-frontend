@@ -1,4 +1,4 @@
-import './Navbar.css'; 
+import './Navbar.css';
 import { assets } from '../../assets/assets';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
@@ -8,7 +8,7 @@ const Navbar = ({ setShowSignup }) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
   const [wishlistOpen, setWishlistOpen] = useState(false);
-  const [searchOpen, setSearchOpen] = useState(false); // New state for search input
+  const [searchOpen, setSearchOpen] = useState(false);
   const [wishlistItems, setWishlistItems] = useState([
     { name: 'Sample Item 1', image: '../../assets/CollectionFirst.png', price: 15 }
   ]);
@@ -31,43 +31,40 @@ const Navbar = ({ setShowSignup }) => {
         <ul className={menuOpen ? 'navbar-links active' : 'navbar-links'}>
           <li><Link to="/">Home</Link></li>
           <li><Link to="/shop">Shop</Link></li>
-          <li><Link to="/About">About Us</Link></li>
+          <li><Link to="/about">About Us</Link></li>
           <li><Link to="/services">Services</Link></li>
           <li><Link to="#blog">Blog</Link></li>
         </ul>
 
-        {/* Sign-Up Button */}
-        <div className="signUp">
-          <button onClick={() => setShowSignup(true)}>Sign Up</button>
-        </div>
-
-        {/* Wishlist Icon */}
-        
-
-        {/* Search Icon and Input */}
+        {/* Sign-Up Button and Icons */}
         <div className="navbar-icons">
-          <img 
-            src={assets.MagnifyingGlass} 
-            alt="Search" 
-            className="logo" 
-            onClick={() => setSearchOpen(!searchOpen)} // Toggle search input
-          />
-          
-          {searchOpen && (
-            <input
-              type="text"
-              placeholder="Search..."
-              className="search-input"
-            />
-          )}
-          {loggedIn && (
+          {!loggedIn ? (
             <>
-            <img 
-          src={assets.Heart} 
-          alt="Wishlist" 
-          className="logo" 
-          onClick={() => setWishlistOpen(true)} 
-        />
+              <div className="signUp">
+                <button onClick={() => setShowSignup(true)}>Sign Up</button>
+              </div>
+              <img 
+                src={assets.MagnifyingGlass} 
+                alt="Search" 
+                className="logo" 
+                onClick={() => setSearchOpen(!searchOpen)} 
+              />
+              {searchOpen && (
+                <input
+                  type="text"
+                  placeholder="Search..."
+                  className="search-input"
+                />
+              )}
+            </>
+          ) : (
+            <>
+              <img 
+                src={assets.Heart} 
+                alt="Wishlist" 
+                className="logo" 
+                onClick={() => setWishlistOpen(true)} 
+              />
               <img src={assets.User} alt="User" className="logo" />
               <img src={assets.Bag} alt="Itembag" className="logo" />
             </>
@@ -83,7 +80,7 @@ const Navbar = ({ setShowSignup }) => {
         />
       )}
     </>
-  );
+  ); 
 };
 
 export default Navbar;

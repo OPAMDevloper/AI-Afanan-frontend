@@ -66,21 +66,6 @@ const Scene = () => {
       .to(model5Ref.current.position, { x: -0.7, y: 0.3, z: 0.2 }, 0)
       .to(model5Ref.current.rotation, { z: -0.25 }, 0);
 
-    // Continuous spinning effect
-    const spinModels = (ref) => {
-      gsap.to(ref.current.rotation, {
-        y: Math.PI * 2,
-        duration: 5,
-        repeat: -1,
-        ease: 'none',
-      });
-    };
-
-    spinModels(model1Ref);
-    spinModels(model2Ref);
-    spinModels(model3Ref);
-    spinModels(model4Ref);
-    spinModels(model5Ref);
 
   }, []);
 

@@ -5,6 +5,7 @@ import Home from './pages/Home/Home';
 import About from './pages/About/AboutSection';
 import Signup from './components/signUp/signUp' // Import Signup component
 import Wishlist from './pages/Wishlist/WishList';
+import ProductList from './pages/Shop/ProductList';
 
 const App = () => {
   // State to control the visibility of Signup component
@@ -21,6 +22,7 @@ const App = () => {
       {/* Define routes for different pages */}
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/Shop" element={<ProductList />} />        
         <Route path="/About" element={<About />} />
         <Route path='/Wishlist' element={<Wishlist />} />
       </Routes>
