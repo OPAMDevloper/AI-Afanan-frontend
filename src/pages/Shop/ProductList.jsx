@@ -1,22 +1,22 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useContext } from "react";
 import axios from "axios";
-import "./ProductList.css"; // Import your CSS file for styling
+import "./ProductList.css";
+import { StoreContext } from "../../context/storeContext";
 
 const ProductList = () => {
     const [products, setProducts] = useState([]);
     const [page, setPage] = useState(1);
+    const { url } = useContext(StoreContext); // Access the URL from StoreContext
 
-    // Wrap fetchProducts in useCallback to avoid it being re-created on every render
     const fetchProducts = useCallback(async () => {
         try {
-            const response = await axios.get(`http://localhost:5000/products?page=${page}`);
+            const response = await axios.get(`${url}/product/all?page=${page}`);
             setProducts(response.data);
         } catch (error) {
             console.error("Error fetching products:", error);
         }
-    }, [page]); // page as a dependency to re-run when it changes
+    }, [page, url]);
 
-    // Call fetchProducts whenever `page` changes
     useEffect(() => {
         fetchProducts();
     }, [fetchProducts]);
