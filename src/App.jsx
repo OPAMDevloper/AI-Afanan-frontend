@@ -6,6 +6,7 @@ import About from './pages/About/AboutSection';
 import Signup from './components/signUp/signUp' // Import Signup component
 import Wishlist from './pages/Wishlist/WishList';
 import ProductList from './pages/Shop/ProductList';
+import BlogList from './pages/Blog/BlogList';
 
 const App = () => {
   // State to control the visibility of Signup component
@@ -25,6 +26,7 @@ const App = () => {
         <Route path="/Shop" element={<ProductList />} />        
         <Route path="/About" element={<About />} />
         <Route path='/Wishlist' element={<Wishlist />} />
+        <Route path='/Blog' element={<BlogList />} />
       </Routes>
     </>
   );

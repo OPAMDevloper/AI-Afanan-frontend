@@ -8,6 +8,7 @@ import ViewCanvas from '../../components/viewCanvas/viewCanvas.jsx'
 import OurValues from '../../components/OurValue/OurValues'
 import './Home.css'
 
+
 const Home = () => {
   return (
 
