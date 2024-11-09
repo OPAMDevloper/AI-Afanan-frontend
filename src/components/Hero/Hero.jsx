@@ -1,18 +1,13 @@
-import React from "react";
 import { useNavigate } from "react-router-dom";
-import gsap from 'gsap';
-import { useGSAP } from '@gsap/react';
 import './Hero.css';
 import { View } from '@react-three/drei';
 import Scene from '../../pages/Scene';
-
-gsap.registerPlugin(useGSAP);
 
 const Hero = () => {
     const navigate = useNavigate(); // React Router's hook for navigation
 
     const handleShopNowClick = () => {
-        navigate("/Shop"); // Navigate to ProductList page
+        navigate("/shop"); // Navigate to ProductList page
     };
 
     return (

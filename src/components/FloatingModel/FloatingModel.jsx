@@ -1,7 +1,6 @@
 import { forwardRef } from 'react';
 import { Float } from '@react-three/drei';
 import { Model } from '../Model';
-import { Group } from 'three';
 
 const FloatingModel = forwardRef(
   (

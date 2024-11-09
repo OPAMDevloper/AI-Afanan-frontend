@@ -1,0 +1,55 @@
+.product-detail-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 50px;
+  background-color: #000000;
+  color: #fff;
+  min-height: 100vh;
+  position: relative;
+}
+
+.product-content {
+  width: 50%;
+  text-align: left;
+  position: relative;
+  z-index: 1; /* Ensure the content is layered above the model */
+}
+
+.ModelContainer {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0; /* Place model beneath the content but above background */
+  pointer-events: none; /* Disable pointer events for model */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.product-detail-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.product-detail-name {
+  font-size: 2rem;
+  margin-top: 10px;
+  color: #ffffff;
+}
+
+.product-detail-price {
+  font-size: 1.5rem;
+  color: #ab572d;
+  margin: 10px 0;
+}
+
+.product-detail-description,
+.product-detail-discount,
+.product-detail-quantity {
+  font-size: 1rem;
+  color: #555;
+}

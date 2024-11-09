@@ -1,24 +1,40 @@
-import { useRef } from 'react';
+import { useRef, useEffect, useState, useContext } from 'react';
 import FloatingModel from '../components/FloatingModel/FloatingModel';
 import { Environment, OrbitControls } from '@react-three/drei';
 import gsap from 'gsap';
-import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import axios from 'axios';
+import { StoreContext } from "../context/storeContext";
+import { useParams } from "react-router-dom";
 
-gsap.registerPlugin(useGSAP, ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger);
 
 const Scene = () => {
   const model1Ref = useRef(null);
   const groupRef = useRef(null);
-
+  const [modelPath, setModelPath] = useState('');
   const FLOAT_SPEED = 1.5;
-  const modelPath = '/blue_perfume_bottle1.glb';
+  const { url } = useContext(StoreContext);
+  const { id } = useParams(); // Fetch the product ID from the URL
 
-  useGSAP(() => {
-    if (!model1Ref.current) return;
+  useEffect(() => {
+    const fetchModelPath = async () => {
+      try {
+        const response = await axios.get(`${url}/product/show/${id}`);
+        console.log("Model path:", response.data.data.imageModel); // Log model path
+        setModelPath(response.data.data.imageModel);
+      } catch (error) {
+        console.error('Error fetching model path:', error);
+      }
+    };
 
-    // Set initial position for desktop
-    const isMobile = window.innerWidth <= 1026 // You can adjust this breakpoint as needed
+    fetchModelPath();
+  }, [id, url]);
+
+  useEffect(() => {
+    if (!model1Ref.current || !modelPath) return;
+
+    const isMobile = window.innerWidth <= 1026;
     const initialPosition = isMobile ? { x: 0, y: -0.3 } : { x: 1.2, y: 0.2 };
 
     gsap.set(model1Ref.current.position, initialPosition);
@@ -41,7 +57,7 @@ const Scene = () => {
         duration: 2,
       },
       scrollTrigger: {
-        trigger: '.hero-container',
+        trigger: '.product-detail-container',
         pin: true,
         start: 'top top',
         end: '+=500',
@@ -55,19 +71,20 @@ const Scene = () => {
       .to(model1Ref.current.position, { x: isMobile ? 0 : -3, y: -0.2, z: 6 }, 0)
       .to(model1Ref.current.rotation, { z: 0.8 }, 0);
 
-    // Make the model spin continuously
     gsap.to(model1Ref.current.rotation, {
       y: Math.PI * 2,
-      duration: 3, // duration of the spin
-      repeat: -1, // infinite spin
-      ease: 'none', // constant spinning
+      duration: 3,
+      repeat: -1,
+      ease: 'none',
     });
-  }, []);
+  }, [modelPath]);
 
   return (
     <group ref={groupRef}>
-      <FloatingModel ref={model1Ref} modelPath={modelPath} floatspeed={FLOAT_SPEED} />
-      <Environment files='/hdr/lobby.hdr' environmentIntensity={1.5} />
+      {modelPath && (
+        <FloatingModel ref={model1Ref} modelPath={modelPath} floatspeed={FLOAT_SPEED} />
+      )}
+      <Environment files="/hdr/lobby.hdr" environmentIntensity={1.5} />
       <OrbitControls />
     </group>
   );

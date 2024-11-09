@@ -54,10 +54,10 @@ const Footer = () => {
             <h3>Pages</h3>
             <ul>
               <li><a href="/About">About Us</a></li>
-              <li><a href="#">Shop</a></li>
+              <li><a href="/Shop">Shop</a></li>
               <li><a href="#">Contact Us</a></li>
               <li><a href="#">Services</a></li>
-              <li><a href="#">Blog</a></li>
+              <li><a href="/Blog">Blog</a></li>
             </ul>
           </div>
         </div>

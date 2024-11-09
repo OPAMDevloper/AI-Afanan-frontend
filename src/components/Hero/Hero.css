@@ -18,12 +18,13 @@
 
 .hero-content h1 {
     font-size: 3rem;
+    font-weight: 300;
     margin-bottom: 20px;
     filter: drop-shadow(1px 1px 300px rgba(255, 255, 255, 0.8));
 }
 
 .hero-content p {
-    font-size: 1.5rem;
+    font-size: 2rem;
     margin-bottom: 40px;
 }
 
@@ -58,15 +59,16 @@
         width: 100%; /* Ensure full width for tablet */
         text-align: center; /* Keep text aligned to the left */
         margin-top: 0; /* Ensure no margin at the top */
+        filter: drop-shadow(4px 4px 100px #ffffff);
     }
 
     .hero-content h1 {
-        font-size: 2rem; /* Adjusted size for better readability */
+        font-size: 2.5rem; /* Adjusted size for better readability */
         margin: 20px 0; /* Margin for spacing */
     }
 
     .hero-content p {
-        font-size: 1.2rem; /* Adjusted size for better readability */
+        font-size: 1.8rem; /* Adjusted size for better readability */
         margin-bottom: 20px; /* Margin for spacing */
     }
 
@@ -83,12 +85,16 @@
         padding: 15px; /* Reduced padding */
     }
 
+    .hero-content{
+            filter: drop-shadow(4px 4px 100px #ffffff);
+    }
+
     .hero-content h1 {
-        font-size: 1.8rem; /* Adjusted size for better readability */
+        font-size: 2rem; /* Adjusted size for better readability */
     }
 
     .hero-content p {
-        font-size: 1rem; /* Adjusted size for better readability */
+        font-size: 1.2rem; /* Adjusted size for better readability */
     }
 
     .hero-btn {
@@ -107,18 +113,20 @@
         height: auto; /* Allow height to adjust automatically */
     }
 
-    .hero-content {
-        text-align: left; /* Keep text aligned to the left */
+    .heroTwo-content{
+        text-align: center; /* Keep text aligned to the left */
         width: 100%; /* Full width */
         margin-top: 0; /* Ensure no margin at the top */
+        filter: drop-shadow(4px 4px 100px #ffffff);
+        
     }
 
     .hero-content h1 {
-        font-size: 1.5rem; /* Adjusted size for better readability */
+        font-size: 1.8rem; /* Adjusted size for better readability */
     }
 
     .hero-content p {
-        font-size: 0.9rem; /* Adjusted size for better readability */
+        font-size: 0.8rem; /* Adjusted size for better readability */
     }
 
     .hero-btn {

@@ -1,5 +1,3 @@
-// HeroTwo.js
-
 import { View } from '@react-three/drei';
 import Scene from '../../pages/SceneThree';
 import './HeroTwo.css'; // Importing the CSS file

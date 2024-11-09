@@ -1,6 +1,6 @@
 import { View } from '@react-three/drei';
 import './empty.css'
-import SceneTwo from '../../pages/SceneTwo';
+import SceneTwo from '../../pages/';
 
 const EmptyComponent = () => {
   return (

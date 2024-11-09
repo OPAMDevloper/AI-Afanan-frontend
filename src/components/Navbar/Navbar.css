@@ -5,7 +5,7 @@
     background-color: #000000;
     padding: 20px 30px;
     color: #fff;
-    position: relative;
+    
     z-index: 1000;
 }
 
@@ -54,6 +54,54 @@
     background-color: #484848;
 }
 
+/* User Dropdown Menu */
+.user-dropdown {
+    position: absolute;
+    top: 0;
+    right: 100px;
+    background-color: #1a1a1a;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 200px;
+    padding: 10px 0;
+    display: none;
+    flex-direction: column;
+    z-index: 1001;
+    transition: opacity 0.3s ease;
+}
+
+/* Show the dropdown when active */
+.user-dropdown.open {
+    display: flex;
+    opacity: 1;
+}
+
+/* Dropdown Item Styles */
+.user-dropdown ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.user-dropdown li {
+    padding: 10px 20px;
+    color: #ffffff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.user-dropdown li:hover {
+    background-color: #333333;
+}
+
+/* Link Styling within Dropdown */
+.user-dropdown li a {
+    color: #ffffff;
+    text-decoration: none;
+    display: block;
+    width: 100%;
+}
+
 /* Hamburger Menu */
 .hamburger {
     display: none;
@@ -95,12 +143,6 @@
 .search-input:focus {
     outline: none;
     border-color: #666;
-}
-
-/* Logo Styling */
-.logo {
-    cursor: pointer;
-    margin-left: 10px;
 }
 
 /* Responsive Styles */

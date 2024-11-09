@@ -1,15 +1,11 @@
-import { useRef } from 'react';
+import { useRef, useEffect } from 'react';
 import FloatingModel from '../components/FloatingModel/FloatingModel';
-import { Environment, OrbitControls, Text } from '@react-three/drei';
+import { Environment, OrbitControls, Text, Cloud } from '@react-three/drei';
 import gsap from 'gsap';
-import { useGSAP } from '@gsap/react';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
-gsap.registerPlugin(ScrollTrigger);
 
 const Scene = () => {
-  const modelRefs = Array.from({ length: 4 }, () => useRef(null));
-  const textRefs = Array.from({ length: 4}, () => useRef(null));
+  const modelRefs = Array.from({ length: 6 }, () => useRef(null));
+  const textRefs = Array.from({ length: 6 }, () => useRef(null));
 
   const FLOAT_SPEED = 1.5;
 
@@ -17,21 +13,18 @@ const Scene = () => {
     '/black_perfume_bottle1.glb',
     '/red_perfume_bottle1.glb',
     '/caribbean_green_perfume_bottle1.glb',
-    '/purple_perfume_bottle1.glb'
-    
-  ];
-
-  const backgroundColors = [
-    '#111111', '#ff6161', '#00ac78', '#DAB1DA'
+    '/purple_perfume_bottle1.glb',
+    '/brown_perfume_bottle1.glb',
+    '/mexican_pink_perfume_bottle1.glb'
   ];
 
   const modelTexts = [
     "TEA ROSE", "AFSHAA",
     "FIDAI", "ETERNITY",
-
+    "TEST", "TEST"
   ];
 
-  useGSAP(() => {
+  useEffect(() => {
     if (modelRefs.some(ref => !ref.current) || textRefs.some(ref => !ref.current)) return;
 
     modelRefs.forEach((modelRef) => {
@@ -44,56 +37,41 @@ const Scene = () => {
       gsap.set(textRef.current, { opacity: 0 });
     });
 
-    const scrollTl = gsap.timeline({
-      scrollTrigger: {
-        trigger: ".collections-section",
-        
-        pin: true,
-        start: "top top",
-        end: "+=4000",
-        scrub: 2,
-        immediateRender: false,
-      },
-    });
-
-    const enterDuration = 6;
-    const exitDuration = 20;
-    const stagger = 1;
+    const timeline = gsap.timeline({ repeat: -1, repeatDelay: 0.5 });
+    const duration = 0.5;
 
     modelRefs.forEach((modelRef, index) => {
       const textRef = textRefs[index].current;
 
-      scrollTl
+      timeline
         .to([modelRef.current.position, textRef.position], {
           x: 0,
-          duration: enterDuration,
+          duration,
           ease: "power1.out"
-        }, `>${stagger * index}`)
+        }, `>${index * duration}`)
         .to(modelRef.current.rotation, {
           y: "+=6.283", // 3 full spins
-          duration: 30,
+          duration: 3,
           ease: "power1.out"
         }, `<`)
-        .to(textRef, { opacity: 1, duration: enterDuration / 2 }, `<`)
-        .to("body", {
-          backgroundColor: backgroundColors[index],
-          duration: enterDuration,
-          ease: "power1.inOut",
-        }, `<`)
-
+        .to(textRef, { opacity: 1, duration: duration / 2 }, `<`)
         .to([modelRef.current.position, textRef.position], {
           x: -8,
           y: 0,
           z: 1,
-          duration: exitDuration,
+          duration,
           ease: "power1.in"
-        }, `>${enterDuration + stagger * index}`)
-        .to(textRef, { opacity: 0, duration: exitDuration / 2 }, `<`);
+        }, `>${duration * 2}`)
+        .to(textRef, { opacity: 0, duration: duration / 2 }, `<`);
     });
   }, []);
 
   return (
     <group>
+      {/* Add Clouds in the Background */}
+      <Cloud position={[0, 0, -20]} scale={[1, 2, 1]} opacity={0.3} speed={0.2} />
+
+      
       {modelRefs.map((modelRef, index) => (
         <FloatingModel key={index} ref={modelRef} modelPath={modelPaths[index]} floatspeed={FLOAT_SPEED} />
       ))}

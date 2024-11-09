@@ -1,4 +1,3 @@
-import React from 'react';
 import './UniqueSection.css'; // External CSS file for styling
 
 const UniqueSection = () => {

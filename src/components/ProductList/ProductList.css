@@ -1,0 +1,98 @@
+.product-list-container {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #000000; /* Dark background */
+}
+
+.product-grid {
+    display: grid;
+    width: 100%;
+    max-width: 1200px;
+    gap: 20px;
+}
+
+/* 4 products per row on desktop */
+@media (min-width: 1024px) {
+    .product-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+/* 3 products per row on tablet */
+@media (min-width: 768px) and (max-width: 1023px) {
+    .product-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* 2 products per row on mobile */
+@media (max-width: 767px) {
+    .product-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.product-card {
+    background: #242424;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    height: 300px; /* Fixed height for each card */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 16px;
+    transition: transform 0.2s ease;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+}
+
+.product-image {
+    width: 100%;
+    height: 250px; /* Fixed height for product image */
+    border-radius: 8px;
+    object-fit: cover;
+    margin-bottom: 8px;
+}
+
+.product-name {
+    font-size: 1rem;
+    color: #ffffff;
+    margin-top: auto; /* Pushes name and price to the bottom */
+}
+
+.product-price {
+    font-size: 0.9rem;
+    color: #ffffff;
+    margin-bottom: 0; /* Ensures alignment at the bottom */
+}
+
+.pagination-controls {
+    margin-top: 20px;
+}
+
+.pagination-controls button {
+    background-color: #AB572D;
+    color: rgb(0, 0, 0);
+    font-weight: 400;
+    border: none;
+    padding: 8px 16px;
+    margin: 0 5px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.pagination-controls button:disabled {
+    background-color: #ffffff;
+    cursor: not-allowed;
+}
+
+.pagination-controls button:hover:not(:disabled) {
+    background-color: #0056b3;
+}

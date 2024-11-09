@@ -13,21 +13,23 @@ const Signup = ({ setShowSignup }) => {
         const { name, value } = event.target;
         setData(data => ({ ...data, [name]: value }));
     };
-    
+
     const onLogin = async (event) => {
         event.preventDefault();
         const newUrl = `${url}/auth/${currentState === 'Login' ? 'login' : 'register'}`;
 
         try {
             const response = await axios.post(newUrl, data, { withCredentials: true });
-            if (response.data.success) {
-                const accessToken = response.data.accessToken;
+            console.log(response.data);
+            console.log(response.data.data.accessToken)
+            if (response.data.statusCode === 200) {
+                const AccessToken = response.data.data.accessToken;
                 
                 if (currentState === 'Login') {
-                    setToken(accessToken);
+                    setToken(AccessToken);
 
                     // Set token as a cookie with expiration of 7 days
-                    document.cookie = `token=${accessToken}; path=/; max-age=${7 * 24 * 60 * 60}`;
+                    document.cookie = `token=${AccessToken}; path=/; max-age=${7 * 24 * 60 * 60}`;
                     console.log("Document cookie:", document.cookie);
 
                     setShowSignup(false); // Close signup modal after login
@@ -37,6 +39,8 @@ const Signup = ({ setShowSignup }) => {
             } else {
                 alert(response.data.message);
             }
+            
+           
         } catch (error) {
             console.error("Error during login/signup", error);
         }

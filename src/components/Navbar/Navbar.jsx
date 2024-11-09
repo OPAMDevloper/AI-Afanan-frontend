@@ -9,12 +9,23 @@ const Navbar = ({ setShowSignup }) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [wishlistOpen, setWishlistOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
-  const { token } = useContext(StoreContext);
+  const [userDropdownOpen, setUserDropdownOpen] = useState(false);
+  const { token, setToken } = useContext(StoreContext);
+
+  // Sample wishlist items for demonstration
   const [wishlistItems] = useState([
-    { name: 'Sample Item 1', image: '../../assets/CollectionFirst.png', price: 15 }
+    { name: 'Sample Item 1', image: assets.CollectionFirst, price: 15 },
   ]);
 
   const toggleMenu = () => setMenuOpen(!menuOpen);
+  const toggleSearch = () => setSearchOpen(!searchOpen);
+  const toggleUserDropdown = () => setUserDropdownOpen(!userDropdownOpen);
+  const toggleWishlist = () => setWishlistOpen(!wishlistOpen);
+
+  const handleLogout = () => {
+    setToken('');
+    setUserDropdownOpen(false);
+  };
 
   return (
     <>
@@ -34,24 +45,68 @@ const Navbar = ({ setShowSignup }) => {
         </ul>
 
         <div className="navbar-icons">
-          {!token ? (
+          {!token && (
+            <button onClick={() => setShowSignup(true)}>Sign Up</button>
+          )}
+
+          <img
+            src={assets.MagnifyingGlass}
+            alt="Search"
+            className="icon"
+            onClick={toggleSearch}
+          />
+          {searchOpen && (
+            <input
+              type="text"
+              placeholder="Search..."
+              className="search-input"
+            />
+          )}
+
+          {/* Wishlist Icon */}
+
+
+          {token && (
             <>
-              <button onClick={() => setShowSignup(true)}>Sign Up</button>
-              <img src={assets.MagnifyingGlass} alt="Search" className="logo" onClick={() => setSearchOpen(!searchOpen)} />
-              {searchOpen && <input type="text" placeholder="Search..." className="search-input" />}
-            </>
-          ) : (
-            <>
-              <img src={assets.Heart} alt="Wishlist" className="logo" onClick={() => setWishlistOpen(true)} />
-              <img src={assets.User} alt="User" className="logo" />
-              <img src={assets.Bag} alt="Itembag" className="logo" />
+
+              <img
+                src={assets.Heart} // Replace with actual heart icon asset
+                alt="Wishlist"
+                className="icon wishlist-icon"
+                onClick={toggleWishlist}
+              />
+
+              <img
+                src={assets.User}
+                alt="User Profile"
+                className="icon"
+                onClick={toggleUserDropdown}
+              />
+
+              {userDropdownOpen && (
+                <div className={`user-dropdown ${userDropdownOpen ? 'open' : ''}`}>
+                  <ul>
+                    <li>
+                      <Link to="/cart">Shopping Bag</Link>
+                    </li>
+                    <li>
+                      <Link to="/profile">Profile</Link>
+                    </li>
+                    <li onClick={handleLogout}>Logout</li>
+                  </ul>
+                </div>
+              )}
             </>
           )}
         </div>
       </nav>
 
+      {/* Wishlist Overlay */}
       {wishlistOpen && (
-        <Wishlist wishlistItems={wishlistItems} closeWishlist={() => setWishlistOpen(false)} />
+        <Wishlist
+          wishlistItems={wishlistItems}
+          closeWishlist={() => setWishlistOpen(false)}
+        />
       )}
     </>
   );
