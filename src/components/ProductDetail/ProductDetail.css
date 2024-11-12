@@ -1,55 +1,170 @@
+/* Remove the scrollbar */
+
+
 .product-detail-container {
   display: flex;
+  justify-content: center;
   align-items: center;
-  justify-content: flex-start;
-  padding: 50px;
-  background-color: #000000;
-  color: #fff;
+  /* padding: 20px; */
   min-height: 100vh;
-  position: relative;
+
+  background-color: #0f0f0f;
+  /* Dark background */
+  overflow: hidden;
+  /* Prevent overflow */
 }
 
 .product-content {
-  width: 50%;
-  text-align: left;
-  position: relative;
-  z-index: 1; /* Ensure the content is layered above the model */
-}
-
-.ModelContainer {
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 0; /* Place model beneath the content but above background */
-  pointer-events: none; /* Disable pointer events for model */
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1400px;
+  border-radius: 16px;
+  background-color: transparent;
+  padding: 0;
+  box-shadow: none;
+  overflow: hidden;
+  /* Prevent content from overflowing */
+}
+
+.product-image {
+  flex: 1;
+  max-width: 600px;
+  margin-right: 50px;
+  position: relative;
+  z-index: 2;
 }
 
 .product-detail-image {
-  max-width: 100%;
-  height: auto;
-  border-radius: 8px;
+  width: 100%;
+  height: 100%;
+  border-radius: 16px;
+  object-fit: cover;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.product-info {
+  flex: 1;
+  color: #fff;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  line-height: 1.6;
+  z-index: 1;
 }
 
 .product-detail-name {
-  font-size: 2rem;
-  margin-top: 10px;
-  color: #ffffff;
+  font-size: 3rem;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 15px;
+  letter-spacing: 1px;
 }
 
 .product-detail-price {
-  font-size: 1.5rem;
-  color: #ab572d;
-  margin: 10px 0;
+  font-size: 2.2rem;
+  font-weight: 600;
+  color: #e25d5d;
+  /* Accent color */
+  margin-bottom: 10px;
 }
 
-.product-detail-description,
-.product-detail-discount,
+.product-detail-discount {
+  font-size: 1.3rem;
+  color: #ffcc00;
+  /* Discount color */
+  margin-bottom: 20px;
+}
+
+.product-detail-description {
+  font-size: 1.15rem;
+  color: #ccc;
+  margin-bottom: 30px;
+  line-height: 1.6;
+}
+
 .product-detail-quantity {
-  font-size: 1rem;
-  color: #555;
+  font-size: 1.2rem;
+  color: #ccc;
+  margin-bottom: 15px;
+}
+
+.quantity-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.quantity-container button {
+  background-color: #e25d5d;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 8px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.quantity-container button:hover {
+  background-color: #ff5722;
+}
+
+.quantity-container input {
+  width: 70px;
+  height: 50px;
+  text-align: center;
+  font-size: 1.4rem;
+  border: 2px solid #333;
+  border-radius: 8px;
+  margin: 0 15px;
+  background-color: #1c1c1c;
+  color: #fff;
+}
+
+.add-to-cart-button {
+  background-color: #e25d5d;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 5px 10px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 100%;
+}
+
+.add-to-cart-button:hover {
+  background-color: #ff5722;
+}
+
+@media (max-width: 768px) {
+  .product-content {
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }
+
+  .product-image {
+    margin-right: 0;
+    margin-bottom: 20px;
+  }
+
+  .product-detail-name {
+    font-size: 2.2rem;
+    margin-bottom: 10px;
+  }
+
+  .quantity-container button {
+    padding: 10px 15px;
+  }
+
+  .quantity-container input {
+    width: 50px;
+    height: 40px;
+  }
+
+  .add-to-cart-button {
+    width: auto;
+    padding: 14px 20px;
+  }
 }

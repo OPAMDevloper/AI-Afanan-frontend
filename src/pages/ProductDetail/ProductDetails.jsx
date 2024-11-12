@@ -6,9 +6,9 @@ const productdetail = () => {
   return (
     <>
 
-    <ProductDetail />
-    <Footer />
-    <ViewCanvas />
+      <ProductDetail />
+      <Footer />
+      {/* <ViewCanvas /> */}
 
     </>
   )
