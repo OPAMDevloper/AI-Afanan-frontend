@@ -17,7 +17,7 @@
 /* 4 products per row on desktop */
 @media (min-width: 1024px) {
     .product-grid {
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: repeat(3, 1fr);
     }
 }
 
@@ -44,7 +44,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding: 16px;
+    padding: 0 36px;
     transition: transform 0.2s ease;
 }
 

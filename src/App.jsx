@@ -2,6 +2,7 @@ import { useState, Suspense, lazy } from 'react';
 import { Routes, Route } from 'react-router-dom'; 
 import Navbar from './components/Navbar/Navbar';
 import Loader from './components/Loader/Loader'; // Import your custom Loader component
+import ProfilePage from './pages/PersonalDetails/PersonalDetails';
 
 
 
@@ -40,6 +41,7 @@ const App = () => {
           <Route path="/product/:id" element={<ProductDetail />} /> {/* Route for ProductDetail */}
           {/* <Route path="/cart" element={<Cart />} /> */}
           <Route path="/profile" element={<Profile />} />
+          <Route path="/personalDetails" element={<ProfilePage />} />
         </Routes>
       </Suspense>
     </>

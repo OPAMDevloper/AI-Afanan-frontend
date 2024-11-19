@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import { useContext, useState } from 'react';
 import Wishlist from '../../pages/Wishlist/WishList';
 import { StoreContext } from '../../context/storeContext';
+import { Button, Drawer } from '@mui/material';
+import CheckoutModal from '../CheckoutModal/CheckoutModal';
 
 const Navbar = ({ setShowSignup }) => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -25,6 +27,12 @@ const Navbar = ({ setShowSignup }) => {
   const handleLogout = () => {
     setToken('');
     setUserDropdownOpen(false);
+  };
+  const [open, setOpen] = useState(false);
+
+  // Toggle drawer open/close
+  const toggleDrawer = (openStatus) => {
+    setOpen(openStatus);
   };
 
   return (
@@ -90,6 +98,9 @@ const Navbar = ({ setShowSignup }) => {
                       <Link to="/cart">Shopping Bag</Link>
                     </li>
                     <li>
+                      <Link to="/personalDetails">Personal Details</Link>
+                    </li>
+                    <li>
                       <Link to="/profile">Profile</Link>
                     </li>
                     <li onClick={handleLogout}>Logout</li>
@@ -108,6 +119,11 @@ const Navbar = ({ setShowSignup }) => {
           closeWishlist={() => setWishlistOpen(false)}
         />
       )}
+      <Drawer anchor="right" open={open} onClose={() => toggleDrawer(false)} >
+        <div style={{ width: 500, padding: 20 }}>
+          <CheckoutModal/>
+        </div>
+      </Drawer>
     </>
   );
 };
