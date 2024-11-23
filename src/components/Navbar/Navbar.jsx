@@ -87,7 +87,7 @@ const Navbar = ({ setShowSignup }) => {
               />
 
               {userDropdownOpen && (
-                <div className={`user-dropdown ${userDropdownOpen ? 'open' : ''}`}>
+                <div className={`user-dropdown ${userDropdownOpen ? 'open' : ''}`} onMouseLeave={()=>setUserDropdownOpen(false)}>
                   <ul>
                     <li>
                       <Link to="/cart">Shopping Bag</Link>
