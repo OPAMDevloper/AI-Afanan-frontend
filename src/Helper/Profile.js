@@ -30,8 +30,9 @@ export const fetchOrderHistoryData = async (url,tokn) => {
         Authorization: `Bearer ${tokn}`,
       },
     });
-
-    return response?.data;
+    console.log(response,'fetchOrderHistoryData');
+    
+    return response?.data?.data?.data;
   } catch (error) {
     console.error("Error fetching product details:", error);
   } finally {
@@ -54,11 +55,25 @@ export const fetchPendingOrdersData = async () => {
 };
 
 // Fetch data for Account Settings
-export const fetchAccountSettingsData = async () => {
-  return [
-    { id: 1, label: "Edit Personal Details" },
-    { id: 2, label: "Manage Addresses" },
-    { id: 3, label: "Change Password" },
-    { id: 4, label: "Log Out" },
-  ];
+export const addToCart = (product) => {
+  // Get existing cart from localStorage, or initialize an empty array if no cart exists
+  let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+  // Check if the product is already in the cart
+  const productIndex = cart.findIndex(item => item._id === product._id);
+
+  if (productIndex !== -1) {
+    // If the product is already in the cart, update its quantity
+    cart[productIndex].quantity += 1;
+  } else {
+    // If the product is not in the cart, add it
+    cart.push({ ...product, quantity: 1 });
+  }
+
+  // Save the updated cart back to localStorage
+  localStorage.setItem('cart', JSON.stringify(cart));
+
+  // Optionally, you can display a notification that the item was added to the cart
+  alert(`${product.name} added to cart`);
 };
+

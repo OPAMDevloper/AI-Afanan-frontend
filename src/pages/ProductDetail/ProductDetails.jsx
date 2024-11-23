@@ -8,7 +8,7 @@ const productdetail = () => {
 
       <ProductDetail />
       <Footer />
-      {/* <ViewCanvas /> */}
+      <ViewCanvas />
 
     </>
   )

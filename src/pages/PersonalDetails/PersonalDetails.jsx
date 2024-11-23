@@ -3,16 +3,17 @@ import React, { useState, useEffect, useContext } from "react";
 import { Tabs, Tab, Box, Typography, IconButton ,List, ListItem, ListItemText, } from "@mui/material";
 import { motion } from "framer-motion";
 import { MdChevronRight } from "react-icons/md";
-import { fetchWishlistData, fetchOrderHistoryData, fetchPendingOrdersData, fetchAccountSettingsData } from "../../Helper/Profile";
+import { fetchWishlistData, fetchOrderHistoryData, fetchPendingOrdersData } from "../../Helper/Profile";
 import "./ProfilePage.css";
 import ProfileCard from "../../components/ProfileCard/ProfileCard";
 import { StoreContext } from "../../context/storeContext";
+import { useNavigate } from "react-router-dom";
 
 const ProfilePage = () => {
   const [activeTab, setActiveTab] = useState(0);
   const [data, setData] = useState([]);
-  const { url,token } = useContext(StoreContext);
-
+  const { url,token ,setToken} = useContext(StoreContext);
+    const navigate  =useNavigate();
   const handleTabChange = (event, newValue) => {
     setActiveTab(newValue);
   };
@@ -25,12 +26,11 @@ const ProfilePage = () => {
         break;
       case 1:
         response = await fetchOrderHistoryData(url,token);
-        console.log(response,'response');
         break;
+      // case 2:
+      //   response = await fetchPendingOrdersData();
+      //   break;
       case 2:
-        response = await fetchPendingOrdersData();
-        break;
-      case 3:
         response = await fetchAccountSettingsData();
         break;
       default:
@@ -45,6 +45,19 @@ const ProfilePage = () => {
 
   const handleRemove = (id) => {
     console.log(`Remove product with ID: ${id}`);
+  };
+
+ const fetchAccountSettingsData = async () => {
+    const handleLogout = () => {
+      setToken('');
+      navigate('/');
+    };
+    return [
+      { id: 1, label: "Edit Personal Details" },
+      { id: 2, label: "Manage Addresses" },
+      { id: 3, label: "Change Password" },
+      { id: 4, label: "Log Out" ,onClick:handleLogout},
+    ];
   };
 
   return (
@@ -93,12 +106,12 @@ const ProfilePage = () => {
       >
         <Tab label="Wishlist" />
         <Tab label="Order History" />
-        <Tab label="Pending Orders" />
+        {/* <Tab label="Pending Orders" /> */}
         <Tab label="Account Settings" />
       </Tabs>
 
-      <Box sx={{ backgroundColor: activeTab !== 3 ? "#FFFFFF0D" : "transparent", padding: activeTab !== 3 ? 2 : 0, borderRadius: 2 }}>
-        {activeTab === 3 ? (
+      <Box sx={{ backgroundColor: activeTab !== 2 ? "#FFFFFF0D" : "transparent", padding: activeTab !== 2 ? 1 : 0, borderRadius: 2 }}>
+        {activeTab === 2 ? (
            <List>
            {data.map((item) => (
              <ListItem
@@ -112,8 +125,8 @@ const ProfilePage = () => {
                  px: 2,
                }}
              >
-               <ListItemText primary={item.label} sx={{ color: "white" }} />
-               <IconButton sx={{ color: "white" }}>
+               <ListItemText primary={item?.label} sx={{ color: "white" }} />
+               <IconButton sx={{ color: "white" }} onClick={item?.onClick ? ()=>item?.onClick(): null}>
                  <MdChevronRight />
                </IconButton>
              </ListItem>
@@ -121,9 +134,12 @@ const ProfilePage = () => {
          </List>
         ) : (
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
-            {data.map((item, index,arr) => (
+            {data?.map((item, index,arr) => (
               <ProfileCard key={item.id} item={item} activeTab={activeTab} handleRemove={handleRemove} index={index} arr={arr}/>
             ))}
+            {data?.length===0 && (
+               <div style={{textAlign:'center'}}>No data Found </div>
+            )}
           </motion.div>
         )}
       </Box>
