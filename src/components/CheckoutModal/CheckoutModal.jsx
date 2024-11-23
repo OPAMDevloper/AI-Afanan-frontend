@@ -96,7 +96,7 @@ const CheckoutModal = ({onClose}) => {
   <Divider sx={{ my: 2, backgroundColor: '#424242' }} />
   
   <List>
-    {cartItems.map((item, index) => (
+    {cartItems?.map((item, index) => (
       <>
       <ListItem key={index} sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <Box sx={{ display: 'flex', alignItems: 'center' ,color:'#fff'}}>
@@ -115,10 +115,11 @@ const CheckoutModal = ({onClose}) => {
      <Divider sx={{ my: 2, backgroundColor: '#424242' }} />
      </>
     ))}
+    
   </List>
 
 
-  <Box display="flex" justifyContent="space-between" alignItems="center">
+ {cartItems.length > 0 ? <> <Box display="flex" justifyContent="space-between" alignItems="center">
     <Typography variant="h6">Total</Typography>
     <Typography variant="h6" sx={{ fontWeight: 'bold' }}>₹{total}</Typography>
   </Box>
@@ -147,7 +148,7 @@ const CheckoutModal = ({onClose}) => {
          onClick={handleCheckout} // Handle add to cart functionality
       >
         CHECK OUT
-      </Button>
+      </Button> </> : <Typography variant="h6">No Item Selected</Typography>}
   </div>
   );
 };

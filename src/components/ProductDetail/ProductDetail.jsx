@@ -28,7 +28,7 @@ const ProductDetail = () => {
   const [product, setProduct] = useState(null);
   const [products, setProducts] = useState(null);
   const [loading, setLoading] = useState(true);
-  const { url ,toggleDrawer} = useContext(StoreContext);
+  const { url, toggleDrawer } = useContext(StoreContext);
   const [quantity, setQuantity] = useState(1);
   const navigate = useNavigate();
   useEffect(() => {
@@ -107,6 +107,40 @@ const ProductDetail = () => {
 
   return (
     <Box sx={{ backgroundColor: "#000", color: "#fff", minHeight: "100vh" }}>
+      <Box
+        sx={{
+          position: "relative",
+          height: "90vh",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          backgroundColor: "#000", // Black background
+          overflow: "hidden",
+        }}
+        >
+        {/* Background Text */}
+        <Typography
+          variant="h1"
+          sx={{
+            color: "rgba(255, 255, 255, 0.1)", // Light gray, semi-transparent
+            fontSize: "14vw",
+            fontFamily: "'Poppins', sans-serif",
+            fontWeight: 700,
+            whiteSpace:'pre-wrap',
+            textAlign: "center",
+            zIndex: 1,
+            overflowWrap: 'break-word',
+            wordBreak: 'break-word',
+            width:'90%',
+            // top:50,
+            overflow: "hidden",
+            position: "absolute",
+          }}
+        >
+          {product?.name}
+        </Typography>
+
+      </Box>
       <Box
         sx={{
           display: "flex",
@@ -256,22 +290,22 @@ const ProductDetail = () => {
             sx={{ display: "flex", alignItems: "center", marginBottom: "16px" }}
           >
             <Rating
-  name="read-only"
-  value={4.5} // You can adjust this value dynamically
-  precision={0.5} // Adjust precision as needed
-  readOnly
-  emptyIcon={<StarBorderOutlinedIcon fontSize="inherit" />} // Empty star as grey
-  sx={{
-    color: 'white', // Color for filled stars (white)
-    '& .MuiRating-iconFilled': {
-      color: 'white', // Ensure filled stars are white
-    },
-    '& .MuiRating-iconEmpty': {
-      color: 'grey', // Ensure empty stars are grey
-    },
-    fontSize: '2rem', // Increase the size of the stars (adjust as needed)
-  }}
-/>
+              name="read-only"
+              value={4.5} // You can adjust this value dynamically
+              precision={0.5} // Adjust precision as needed
+              readOnly
+              emptyIcon={<StarBorderOutlinedIcon fontSize="inherit" />} // Empty star as grey
+              sx={{
+                color: "white", // Color for filled stars (white)
+                "& .MuiRating-iconFilled": {
+                  color: "white", // Ensure filled stars are white
+                },
+                "& .MuiRating-iconEmpty": {
+                  color: "grey", // Ensure empty stars are grey
+                },
+                fontSize: "2rem", // Increase the size of the stars (adjust as needed)
+              }}
+            />
             <Typography sx={{ marginLeft: "8px" }}>4.5</Typography>
           </Box>
         </Box>
@@ -364,7 +398,7 @@ const ProductDetail = () => {
           justifyContent: "center",
           padding: "10px",
           marginTop: "16px",
-          marginBottom: "2px",
+          marginBottom: "20px",
           margin: "auto",
           "&:hover": {
             backgroundColor: "#FF6347", // On hover background color changes to orange
@@ -372,7 +406,7 @@ const ProductDetail = () => {
           },
         }}
         startIcon={<AddShoppingCart />} // Icon before text
-        onClick={()=>handleAddToCart(product)} // Handle add to cart functionality
+        onClick={() => handleAddToCart(product)} // Handle add to cart functionality
       >
         Add to Bag
       </Button>

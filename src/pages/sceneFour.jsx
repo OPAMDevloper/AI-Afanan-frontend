@@ -69,7 +69,7 @@ const Scene = () => {
   return (
     <group>
       {/* Add Clouds in the Background */}
-      <Cloud position={[0, 0, -20]} scale={[1, 2, 1]} opacity={0.3} speed={0.2} />
+      {/* <Cloud position={[0, 0, -20]} scale={[1, 2, 1]} opacity={0.3} speed={0.2} /> */}
 
       
       {modelRefs.map((modelRef, index) => (
@@ -79,10 +79,10 @@ const Scene = () => {
         <Text
           key={index}
           ref={textRefs[index]}
-          font="/fonts/Font.woff"
-          position={[4, 0, 0]}
+          font="/fonts/Poppins-Bold.ttf"
+          position={[1, 0, 0]}
           fontSize={0.2}
-          fontWeight={900}
+          fontWeight={700}
           color="ffffff"
           anchorX="center"
           anchorY="middle"
