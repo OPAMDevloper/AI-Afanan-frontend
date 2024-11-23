@@ -72,7 +72,9 @@ const CheckoutModal = ({onClose}) => {
       console.log('Order created successfully:', response.data);
       setLoading(false);
       localStorage.removeItem('cart'); 
-      navigate('/personalDetails')
+      navigate('/personalDetails');
+      toggleDrawer();
+      
       // Optionally close the drawer after successful order creation
       setOpen(false);
     } catch (err) {
