@@ -3,6 +3,8 @@ import { Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar/Navbar';
 import Loader from './components/Loader/Loader'; // Import your custom Loader component
 import ProfilePage from './pages/PersonalDetails/PersonalDetails';
+import Shop from './pages/Shop/Shop';
+import ProductDetail from './pages/ProductDetail/ProductDetails';
 
 
 
@@ -12,8 +14,6 @@ const About = lazy(() => import('./pages/About/AboutSection'));
 const Signup = lazy(() => import('./components/signUp/signUp'));
 const Wishlist = lazy(() => import('./pages/Wishlist/WishList'));
 const BlogAll = lazy(() => import('./pages/BlogAll/BlogAll'));
-const Shop = lazy(() => import('./pages/Shop/Shop'));
-const ProductDetail = lazy(() => import('./pages/ProductDetail/ProductDetails'));
 const Cart = lazy(() => import('./pages/Cart/Cart'));
 const Profile = lazy(() => import('./components/Profile/Profile'));
 

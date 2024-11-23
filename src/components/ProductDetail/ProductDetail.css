@@ -168,3 +168,15 @@
     padding: 14px 20px;
   }
 }
+.scroll-container {
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+}
+
+.section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  scroll-snap-align: center;
+  background-color: #f0f0f0;
+}

@@ -41,7 +41,7 @@ const ProfileCard = ({ item, activeTab, handleRemove, index ,arr,modelPath="/bro
               <Typography>Type: {item?.type}</Typography>
             </>
           )}
-          {(activeTab === 1 || activeTab === 2) && (
+          {(activeTab === 1 ) && (
             <>
               <Typography>Order Date: {moment(item?.updatedAt).format('DD-MM-YYYY')}</Typography>
               <Typography>Quantity: {item?.products?.length}</Typography>
@@ -57,7 +57,7 @@ const ProfileCard = ({ item, activeTab, handleRemove, index ,arr,modelPath="/bro
             <MdClose />
           </IconButton>
         )}
-        {(activeTab === 1 || activeTab === 2) && (
+        {(activeTab === 1) && (
           <Typography
             sx={{
               color: item?.status === 'pending' ?  "orange" :"green" ,
@@ -68,7 +68,7 @@ const ProfileCard = ({ item, activeTab, handleRemove, index ,arr,modelPath="/bro
             {item?.status}
           </Typography>
         )}
-        {activeTab === 3 && (
+        {activeTab === 2 && (
           <ListItemText primary={item?.label} sx={{ color: "white" }} />
         )}
       </Box>

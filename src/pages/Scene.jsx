@@ -7,12 +7,11 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
-const Scene = () => {
+const Scene = ({modelPath='/blue_perfume_bottle1.glb'}) => {
   const model1Ref = useRef(null);
   const groupRef = useRef(null);
 
   const FLOAT_SPEED = 1.5;
-  const modelPath = '/blue_perfume_bottle1.glb';
 
   useGSAP(() => {
     if (!model1Ref.current) return;

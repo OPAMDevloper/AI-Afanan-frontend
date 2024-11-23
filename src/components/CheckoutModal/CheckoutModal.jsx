@@ -1,76 +1,146 @@
-import React, { useState } from "react";
-import {
-  Typography,
-  Card,
-  CardContent,
-  CardMedia,
-  Button,
-  Box,
-} from "@mui/material";
+import React, { useContext, useEffect, useState } from "react";
 import ProfileCard from "../ProfileCard/ProfileCard";
+import { Drawer, List, ListItem, ListItemText, IconButton, Typography, Box, Divider, Button } from '@mui/material';
+import { Close as CloseIcon } from '@mui/icons-material';
+import { AddShoppingCart } from "@mui/icons-material";
+
 
 import "../../pages/PersonalDetails/ProfilePage.css";
+import axios from "axios";
+import { StoreContext } from "../../context/storeContext";
 
-const CheckoutModal = () => {
-  const [cart, setCart] = useState([]);
+const CheckoutModal = ({onClose}) => {
+  const [cartItems, setCart] = useState([]);
   const [total, setTotal] = useState(0);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const { url ,isDrawerOpen, toggleDrawer } = useContext(StoreContext);
 
-  const addToCart = (item) => {
-    setCart([...cart, item]);
-    setTotal(total + item.price);
+  const calculateTotal = (cartItems) => {
+    return cartItems.reduce((total, item) => {
+      return total + (item.price * item.quantity);
+    }, 0);
   };
 
-  const removeFromCart = (item) => {
-    const updatedCart = cart.filter((cartItem) => cartItem !== item);
+  const handleToggleDrawer = () => {
+    onClose();
+  };
+
+  const addToCart = (product) => {
+    const updatedCart = [...cartItems, product];
     setCart(updatedCart);
-    setTotal(total - item.price);
+    localStorage.setItem('cart', JSON.stringify(updatedCart));
+    setTotal(calculateTotal(updatedCart));
   };
 
-  const image = ""; // Placeholder for image URL
-  const data = [
-    {
-      id: 123,
-      name: "Ambar Ki Mas'huriyat",
-      mrp: "67",
-      type: "Perfume",
-      quantity: "2",
-      total: 100,
-    },
-  ];
-  return (
-    <div>
-      <Typography variant="h4" align="center" gutterBottom>
-        Perfume Brand
-      </Typography>
-      <Box
-        display="grid"
-        gridTemplateColumns="repeat(auto-fill, minmax(300px, 1fr))"
-        gap={2}
-        justifyItems="center"
-      >
-        {data.map((item, index, arr) => (
-          <ProfileCard
-            key={item.id}
-            item={item}
-            // activeTab={activeTab}
-            handleRemove={removeFromCart}
-            index={index}
-            arr={arr}
-          />
-        ))}
-      </Box>
 
-      <Box mt={2}>
-        <Typography variant="h6">Total: ₹{total}</Typography>
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={() => alert("Proceeding to checkout")}
-        >
-          Checkout
-        </Button>
-      </Box>
-    </div>
+  useEffect(() => {
+    // Retrieve the cart from localStorage when the drawer is opened
+    const savedCart = JSON.parse(localStorage.getItem('cart')) || [];
+    setCart(savedCart);
+    setTotal(calculateTotal(savedCart));
+  }, []);
+
+  const handleRemoveItem = (productId) => {
+    const updatedCart = cartItems.filter(item => item._id !== productId);
+    setCart(updatedCart);
+    localStorage.setItem('cart', JSON.stringify(updatedCart));
+  };
+
+  const handleCheckout = async () => {
+    setLoading(true);
+    setError(null);
+
+    const payload = {
+      products: cartItems.map(item => ({
+        productId: item.productId,
+        quantity: item.qty,
+      })),
+      amount: total,
+      address: 'Indore, Madhya Pradesh',
+    };
+
+    try {
+      const response = await axios.post('{{url}}/order/create', payload);
+      // Handle success response (e.g., redirect to order confirmation page)
+      console.log('Order created successfully:', response.data);
+      setLoading(false);
+      // Optionally close the drawer after successful order creation
+      setOpen(false);
+    } catch (err) {
+      // Handle error
+      setLoading(false);
+      setError('Something went wrong while creating the order.');
+      console.error(err);
+    }
+  };
+
+
+
+  return (
+    <div className="cart-drawer">
+    <Box display="flex" justifyContent="space-between" alignItems="center">
+    <Typography variant="h6" sx={{ fontWeight: 'bold' }}>Your Cart</Typography>
+    <IconButton onClick={handleToggleDrawer}>
+      <CloseIcon sx={{ color: '#fff' }} />
+    </IconButton>
+  </Box>
+  <Divider sx={{ my: 2, backgroundColor: '#424242' }} />
+  
+  <List>
+    {cartItems.map((item, index) => (
+      <>
+      <ListItem key={index} sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <Box sx={{ display: 'flex', alignItems: 'center' ,color:'#fff'}}>
+          <img src={`${url}/${item.image}`} alt={item.name} style={{ width: 40, height: 40, marginRight: 10 }} />
+          <ListItemText
+            primary={item.name}
+            secondary={`Qty: ${item.quantity} | M.R.P: ₹${item.price}`}
+            primaryTypographyProps={{ fontWeight: 'bold', fontSize: '16px',color:'#fff' }}
+            secondaryTypographyProps={{ fontSize: '14px' ,color:'#fff' }}
+          />
+        </Box>
+        <IconButton edge="end" sx={{ color: '#fff' }} onClick={()=>handleRemoveItem(item._id)}>
+          <CloseIcon />
+        </IconButton>
+      </ListItem>
+     <Divider sx={{ my: 2, backgroundColor: '#424242' }} />
+     </>
+    ))}
+  </List>
+
+
+  <Box display="flex" justifyContent="space-between" alignItems="center">
+    <Typography variant="h6">Total</Typography>
+    <Typography variant="h6" sx={{ fontWeight: 'bold' }}>₹{total}</Typography>
+  </Box>
+
+  <Button
+        variant="contained"
+        sx={{
+          width: "80%", // 80% width
+          borderRadius: "20px", // Border radius 20px
+          backgroundColor: "#fff", // Initial background color (color can be changed here)
+          color: "black", // Initial text color black
+          textTransform: "none", // To prevent uppercase text transformation
+          display: "flex",
+          alignItems: "center", // Align icon and text
+          justifyContent: "center",
+          padding: "10px",
+          marginTop: "16px",
+          marginBottom: "2px",
+          margin: "auto",
+          "&:hover": {
+            backgroundColor: "#FF6347", // On hover background color changes to orange
+            color: "white", // On hover text color changes to white
+          },
+        }}
+        startIcon={<AddShoppingCart />} // Icon before text
+         onClick={handleCheckout} // Handle add to cart functionality
+      >
+        CHECK OUT
+      </Button>
+  </div>
   );
 };
 

@@ -12,7 +12,7 @@ const Navbar = ({ setShowSignup }) => {
   const [wishlistOpen, setWishlistOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [userDropdownOpen, setUserDropdownOpen] = useState(false);
-  const { token, setToken } = useContext(StoreContext);
+  const { token, setToken ,isDrawerOpen, toggleDrawer  } = useContext(StoreContext);
 
   // Sample wishlist items for demonstration
   const [wishlistItems] = useState([
@@ -29,11 +29,6 @@ const Navbar = ({ setShowSignup }) => {
     setUserDropdownOpen(false);
   };
   const [open, setOpen] = useState(false);
-
-  // Toggle drawer open/close
-  const toggleDrawer = (openStatus) => {
-    setOpen(openStatus);
-  };
 
   return (
     <>
@@ -81,7 +76,7 @@ const Navbar = ({ setShowSignup }) => {
                 src={assets.Heart} // Replace with actual heart icon asset
                 alt="Wishlist"
                 className="icon wishlist-icon"
-                onClick={toggleWishlist}
+                onClick={toggleDrawer}
               />
 
               <img
@@ -119,9 +114,24 @@ const Navbar = ({ setShowSignup }) => {
           closeWishlist={() => setWishlistOpen(false)}
         />
       )}
-      <Drawer anchor="right" open={open} onClose={() => toggleDrawer(false)} >
+      <Drawer anchor="right" open={isDrawerOpen} onClose={() => toggleDrawer()} 
+         sx={{
+          '& .MuiDrawer-paper': {
+           
+            height: '100%', // Full height
+            background: 'linear-gradient(#3b3b3b, rgba(0, 0, 0, 0.8))',// Semi-transparent background
+            backdropFilter: 'blur(15px)', // Blur effect
+            display: 'flex',
+            flexDirection: 'column',
+            color:'#fff',
+            padding: '20px',
+            overflowY: 'auto',
+            zIndex: 1300, // Ensure it's above other content
+          },
+         }}
+      >
         <div style={{ width: 500, padding: 20 }}>
-          <CheckoutModal/>
+          <CheckoutModal onClose={() => toggleDrawer()}/>
         </div>
       </Drawer>
     </>
