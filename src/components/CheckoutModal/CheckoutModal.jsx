@@ -8,13 +8,15 @@ import { AddShoppingCart } from "@mui/icons-material";
 import "../../pages/PersonalDetails/ProfilePage.css";
 import axios from "axios";
 import { StoreContext } from "../../context/storeContext";
+import { useNavigate } from "react-router-dom";
 
 const CheckoutModal = ({onClose}) => {
   const [cartItems, setCart] = useState([]);
   const [total, setTotal] = useState(0);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const { url ,isDrawerOpen, toggleDrawer } = useContext(StoreContext);
+  const { url ,token, toggleDrawer } = useContext(StoreContext);
+  const navigate = useNavigate(); // React Router's hook for navigation
 
   const calculateTotal = (cartItems) => {
     return cartItems.reduce((total, item) => {
@@ -53,18 +55,24 @@ const CheckoutModal = ({onClose}) => {
 
     const payload = {
       products: cartItems.map(item => ({
-        productId: item.productId,
-        quantity: item.qty,
+        productId: item._id,
+        quantity: item.quantity,
       })),
       amount: total,
       address: 'Indore, Madhya Pradesh',
     };
 
     try {
-      const response = await axios.post('{{url}}/order/create', payload);
+      const response = await axios.post(`${url}/order/create`, payload,{
+        headers: {
+          'Authorization': `Bearer ${token}`,
+        },
+      });
       // Handle success response (e.g., redirect to order confirmation page)
       console.log('Order created successfully:', response.data);
       setLoading(false);
+      localStorage.removeItem('cart'); 
+      navigate('/personalDetails')
       // Optionally close the drawer after successful order creation
       setOpen(false);
     } catch (err) {

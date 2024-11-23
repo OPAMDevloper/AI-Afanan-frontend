@@ -4,22 +4,8 @@ import axios from "axios";
 
 // Fetch data for Wishlist
 export const fetchWishlistData = async () => {
-  return [
-    {
-      id: 1,
-      name: "Wishlist Item 1",
-      mrp: "$25",
-      type: "Attract",
-      image: "/path/to/image1.jpg",
-    },
-    {
-      id: 2,
-      name: "Wishlist Item 2",
-      mrp: "$50",
-      type: "Attract",
-      image: "/path/to/image2.jpg",
-    },
-  ];
+  const savedCart = JSON.parse(localStorage.getItem('cart')) || [];
+  return savedCart;
 };
 
 // Fetch data for Order History

@@ -37,14 +37,14 @@ const ProfileCard = ({ item, activeTab, handleRemove, index ,arr,modelPath="/bro
           <Typography variant="h6">{item?.name}</Typography>
           {activeTab === 0 && (
             <>
-              <Typography>MRP: {item?.amount}</Typography>
-              <Typography>Type: {item?.type}</Typography>
+              <Typography>MRP: {item?.price}</Typography>
+              <Typography>Quantity: {item?.quantity}</Typography>
             </>
           )}
           {(activeTab === 1 ) && (
             <>
               <Typography>Order Date: {moment(item?.updatedAt).format('DD-MM-YYYY')}</Typography>
-              <Typography>Quantity: {item?.products?.length}</Typography>
+              <Typography>Quantity: {item?.products?.[0]?.quantity}</Typography>
                 <Typography>MRP: {item?.amount}</Typography>
             </>
           )}
