@@ -74,35 +74,63 @@ const Scene = forwardRef(({ modelPath = '/blue_perfume_bottle1.glb' }, ref) => {
   }, []);
 
   // Function to handle the button click animation (sinking effect)
-  const handleButtonClick = () => {
-    if (model1Ref.current) {
-      const targetPosition = { x: 0, y: 0, z: 0 }; // Adjust as per your needs
+// Function to handle the button click animation (sinking effect)
+const handleButtonClick = () => {
+  if (model1Ref.current) {
+    const targetPosition = { x: 0, y: -2, z: 0 }; // Target sinking position
+    const originalPosition = { x: 0, y: 0.51, z: 1 }; // Original position
+    const originalScale = { x: 0.5, y: 0.5, z: 0.5 }; // Original scale
 
-      // Move the model into the button and scale it down
-      gsap.to(model1Ref.current.position, {
-        y: -2, // Move model down into the button's area
-        x: 0, // Keep the x-axis same
-        z: 0, // Keep the z-axis same
-        duration: 5,
-        ease: 'power2.out',
-      });
+    // Move the model into the button and scale it down
+    gsap.to(model1Ref.current.position, {
+      x: targetPosition.x,
+      y: targetPosition.y,
+      z: targetPosition.z,
+      duration: 5,
+      ease: 'power2.out',
+      onComplete: () => {
+        // Return model to its original position and scale after animation completes
+        gsap.to(model1Ref.current.position, {
+          x: originalPosition.x,
+          y: originalPosition.y,
+          z: originalPosition.z,
+          duration: 1,
+          ease: 'power2.inOut',
+        });
 
-      gsap.to(model1Ref.current.scale, {
-        x: 0.1,
-        y: 0.1,
-        z: 0.1,
-        duration: 1.5,
-        ease: 'power2.out',
-      });
+        gsap.to(model1Ref.current.scale, {
+          x: originalScale.x,
+          y: originalScale.y,
+          z: originalScale.z,
+          duration: 1,
+          ease: 'power2.inOut',
+        });
 
-      // Fade out the model (disappear effect)
-      gsap.to(model1Ref.current, {
-        opacity: 0,
-        duration: 1,
-        delay: 0.5,
-      });
-    }
-  };
+        // Restore opacity
+        gsap.to(model1Ref.current, {
+          opacity: 1,
+          duration: 0.5,
+        });
+      },
+    });
+
+    gsap.to(model1Ref.current.scale, {
+      x: 0.1,
+      y: 0.1,
+      z: 0.1,
+      duration: 1.5,
+      ease: 'power2.out',
+    });
+
+    // Fade out the model (disappear effect)
+    gsap.to(model1Ref.current, {
+      opacity: 0,
+      duration: 1,
+      delay: 0.5,
+    });
+  }
+};
+
 
   return (
     <group ref={groupRef}>
