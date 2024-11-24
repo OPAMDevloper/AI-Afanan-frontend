@@ -13,7 +13,7 @@ const ViewCanvas = () => {
         transform: "translateX(-50%)",
         overflow: "hidden",
         pointerEvents: "none",
-        zIndex: 1
+        zIndex: 1,
       }}
       shadows
       dpr={[1, 1.5]}

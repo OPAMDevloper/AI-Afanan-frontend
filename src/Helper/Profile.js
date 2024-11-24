@@ -59,7 +59,5 @@ export const addToCart = (product) => {
   // Save the updated cart back to localStorage
   localStorage.setItem('cart', JSON.stringify(cart));
 
-  // Optionally, you can display a notification that the item was added to the cart
-  alert(`${product.name} added to cart`);
 };
 
