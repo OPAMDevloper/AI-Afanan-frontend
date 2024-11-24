@@ -8,10 +8,12 @@ import "./ProfilePage.css";
 import ProfileCard from "../../components/ProfileCard/ProfileCard";
 import { StoreContext } from "../../context/storeContext";
 import { useNavigate } from "react-router-dom";
+import Loader from "../../components/Loader/Loader";
 
 const ProfilePage = () => {
   const [activeTab, setActiveTab] = useState(0);
   const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
   const { url,token ,setToken} = useContext(StoreContext);
     const navigate  =useNavigate();
   const handleTabChange = (event, newValue) => {
@@ -20,6 +22,7 @@ const ProfilePage = () => {
 
   const fetchTabData = async (tabIndex) => {
     let response;
+    setLoading(true);
     switch (tabIndex) {
       case 0:
         response = await fetchWishlistData();
@@ -36,6 +39,7 @@ const ProfilePage = () => {
       default:
         response = [];
     }
+    setLoading(false);
     setData(response);
   };
 
@@ -43,9 +47,11 @@ const ProfilePage = () => {
     fetchTabData(activeTab);
   }, [activeTab]);
 
-  const handleRemove = (id) => {
-    console.log(`Remove product with ID: ${id}`);
-  };
+  const handleRemove = (productId) => {
+      const updatedCart = data.filter(item => item._id !== productId);
+      setData(updatedCart);
+      localStorage.setItem('cart', JSON.stringify(updatedCart));
+    };
 
  const fetchAccountSettingsData = async () => {
     const handleLogout = () => {
@@ -62,6 +68,7 @@ const ProfilePage = () => {
 
   return (
     <Box className="profile-container" sx={{ bgcolor: "black", color: "white", minHeight: "100vh", position: "relative", overflow: "hidden" }}>
+      {loading && <Loader />}
       <Box className="profile-top-row" display="flex" gap={2} mb={3}>
         <Box className="profile-box" flex={1} p={3} border={1} borderColor="white" borderRadius={3}>
           <Typography variant="h6">Personal Details</Typography>

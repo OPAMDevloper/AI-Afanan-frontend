@@ -9,6 +9,7 @@ import "../../pages/PersonalDetails/ProfilePage.css";
 import axios from "axios";
 import { StoreContext } from "../../context/storeContext";
 import { useNavigate } from "react-router-dom";
+import Loader from "../Loader/Loader";
 
 const CheckoutModal = ({onClose}) => {
   const [cartItems, setCart] = useState([]);
@@ -89,6 +90,7 @@ const CheckoutModal = ({onClose}) => {
 
   return (
     <div className="cart-drawer">
+       {loading && <Loader />}
     <Box display="flex" justifyContent="space-between" alignItems="center">
     <Typography variant="h6" sx={{ fontWeight: 'bold' }}>Your Cart</Typography>
     <IconButton onClick={handleToggleDrawer}>

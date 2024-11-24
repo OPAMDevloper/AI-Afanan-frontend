@@ -27,6 +27,7 @@ const StoreContextProvider = (props) => {
   const [token, setToken] = useState("");
   const [cartItems, setCartItems] = useState({});
   const [isDrawerOpen, setIsDrawerOpen] = useState(false); // Drawer state
+  const [showSignup, setShowSignup] = useState(false); // Drawer state
 
  // Function to open and close the drawer
  const toggleDrawer = () => {
@@ -87,6 +88,8 @@ const StoreContextProvider = (props) => {
     getTotalCartAmount,
     toggleDrawer,
     isDrawerOpen,
+    showSignup,
+    setShowSignup,
   };
 
   return (

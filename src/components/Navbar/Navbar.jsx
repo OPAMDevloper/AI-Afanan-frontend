@@ -1,18 +1,18 @@
 import './Navbar.css';
 import { assets } from '../../assets/assets';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useContext, useState } from 'react';
 import Wishlist from '../../pages/Wishlist/WishList';
 import { StoreContext } from '../../context/storeContext';
 import { Button, Drawer } from '@mui/material';
 import CheckoutModal from '../CheckoutModal/CheckoutModal';
 
-const Navbar = ({ setShowSignup }) => {
+const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [wishlistOpen, setWishlistOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [userDropdownOpen, setUserDropdownOpen] = useState(false);
-  const { token, setToken ,isDrawerOpen, toggleDrawer  } = useContext(StoreContext);
+  const { token, setToken ,isDrawerOpen, toggleDrawer ,setShowSignup } = useContext(StoreContext);
 
   // Sample wishlist items for demonstration
   const [wishlistItems] = useState([
@@ -28,7 +28,10 @@ const Navbar = ({ setShowSignup }) => {
     setToken('');
     setUserDropdownOpen(false);
   };
-  const [open, setOpen] = useState(false);
+  const location = useLocation();
+  const { hash, pathname, search } = location;
+  console.log(pathname,'pathname');
+  
 
   return (
     <>
@@ -40,11 +43,11 @@ const Navbar = ({ setShowSignup }) => {
         </div>
 
         <ul className={menuOpen ? 'navbar-links active' : 'navbar-links'}>
-          <li><Link to="/">Home</Link></li>
-          <li><Link to="/shop">Shop</Link></li>
-          <li><Link to="/about">About Us</Link></li>
-          {/* <li><Link to="/services">Services</Link></li> */}
-          <li><Link to="/blog">Blog</Link></li>
+          <li className={pathname==="/" ? 'active':''}><Link to="/">Home</Link></li>
+          <li className={pathname==="/shop" ? 'active':''}><Link to="/shop">Shop</Link></li>
+          <li className={pathname==="/about" ? 'active':''}><Link to="/about">About Us</Link></li>
+          {/* <li className={pathname==="/services" ? 'active':''}><Link to="/services">Services</Link></li> */}
+          <li className={pathname==="/blog" ? 'active':''}><Link to="/blog">Blog</Link></li>
         </ul>
 
         <div className="navbar-icons">

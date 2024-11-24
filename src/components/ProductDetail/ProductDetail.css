@@ -180,3 +180,26 @@
   scroll-snap-align: center;
   background-color: #f0f0f0;
 }
+
+
+.scroll-container {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+.section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.add-to-bag {
+  padding: 10px 20px;
+  font-size: 18px;
+  background-color: #ff4081;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}

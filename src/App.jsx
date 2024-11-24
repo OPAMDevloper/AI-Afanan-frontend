@@ -1,15 +1,15 @@
-import { useState, Suspense, lazy } from 'react';
+import { useState, Suspense, lazy, useContext } from 'react';
 import { Routes, Route } from 'react-router-dom'; 
 import Navbar from './components/Navbar/Navbar';
 import Loader from './components/Loader/Loader'; // Import your custom Loader component
 import ProfilePage from './pages/PersonalDetails/PersonalDetails';
 import Shop from './pages/Shop/Shop';
 import ProductDetail from './pages/ProductDetail/ProductDetails';
+import Home from './pages/Home/Home';
+import { StoreContext } from './context/storeContext';
 
 
 
-// Lazy load the components
-const Home = lazy(() => import('./pages/Home/Home'));
 const About = lazy(() => import('./pages/About/AboutSection'));
 const Signup = lazy(() => import('./components/signUp/signUp'));
 const Wishlist = lazy(() => import('./pages/Wishlist/WishList'));
@@ -18,16 +18,16 @@ const Cart = lazy(() => import('./pages/Cart/Cart'));
 const Profile = lazy(() => import('./components/Profile/Profile'));
 
 const App = () => {
-  const [showSignup, setShowSignup] = useState(false); // Controls Signup popup visibility
+  const {  showSignup } = useContext(StoreContext);
 
   return (
     <>
-      <Navbar setShowSignup={setShowSignup} /> 
+      <Navbar /> 
       
       {/* Conditionally render Signup component */}
       {showSignup && (
         <Suspense fallback={<Loader />}>
-          <Signup setShowSignup={setShowSignup} />
+          <Signup />
         </Suspense>
       )}
 

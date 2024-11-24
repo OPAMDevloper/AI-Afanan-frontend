@@ -52,7 +52,7 @@ const ProfileCard = ({ item, activeTab, handleRemove, index ,arr,modelPath="/bro
         {activeTab === 0 && (
           <IconButton
             sx={{ color: "white" }}
-            onClick={() => handleRemove(item?.id)}
+            onClick={() => handleRemove(item?._id)}
           >
             <MdClose />
           </IconButton>
