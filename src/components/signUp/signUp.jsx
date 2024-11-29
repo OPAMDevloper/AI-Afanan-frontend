@@ -3,11 +3,13 @@ import './signUp.css';
 import { assets } from '../../assets/assets';
 import { StoreContext } from '../../context/storeContext';
 import axios from 'axios';
+import Loader from '../Loader/Loader';
 
-const Signup = ({ setShowSignup }) => {
+const Signup = () => {
     const [currentState, setCurrentState] = useState("Login");
-    const { url, setToken } = useContext(StoreContext);
+    const { url, setToken ,setShowSignup} = useContext(StoreContext);
     const [data, setData] = useState({ name: "", email: "", password: "" });
+    const [loading, setLoading] = useState(false);
 
     const onChangeHandler = (event) => {
         const { name, value } = event.target;
@@ -17,7 +19,7 @@ const Signup = ({ setShowSignup }) => {
     const onLogin = async (event) => {
         event.preventDefault();
         const newUrl = `${url}/auth/${currentState === 'Login' ? 'login' : 'register'}`;
-
+        setLoading(true);
         try {
             const response = await axios.post(newUrl, data, { withCredentials: true });
             console.log(response.data);
@@ -43,11 +45,14 @@ const Signup = ({ setShowSignup }) => {
            
         } catch (error) {
             console.error("Error during login/signup", error);
+        } finally {
+            setLoading(false);
         }
     };
 
     return (
         <div className="LoginPop">
+              {loading && <Loader />}
             <form onSubmit={onLogin} className="loginPopcon">
                 <div className="loginPopTitle">
                     <h2>{currentState}</h2>

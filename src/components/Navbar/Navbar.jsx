@@ -1,16 +1,18 @@
 import './Navbar.css';
 import { assets } from '../../assets/assets';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useContext, useState } from 'react';
 import Wishlist from '../../pages/Wishlist/WishList';
 import { StoreContext } from '../../context/storeContext';
+import { Button, Drawer } from '@mui/material';
+import CheckoutModal from '../CheckoutModal/CheckoutModal';
 
-const Navbar = ({ setShowSignup }) => {
+const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [wishlistOpen, setWishlistOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [userDropdownOpen, setUserDropdownOpen] = useState(false);
-  const { token, setToken } = useContext(StoreContext);
+  const { token, setToken ,isDrawerOpen, toggleDrawer ,setShowSignup } = useContext(StoreContext);
 
   // Sample wishlist items for demonstration
   const [wishlistItems] = useState([
@@ -26,6 +28,10 @@ const Navbar = ({ setShowSignup }) => {
     setToken('');
     setUserDropdownOpen(false);
   };
+  const location = useLocation();
+  const { hash, pathname, search } = location;
+  console.log(pathname,'pathname');
+  
 
   return (
     <>
@@ -37,11 +43,11 @@ const Navbar = ({ setShowSignup }) => {
         </div>
 
         <ul className={menuOpen ? 'navbar-links active' : 'navbar-links'}>
-          <li><Link to="/">Home</Link></li>
-          <li><Link to="/shop">Shop</Link></li>
-          <li><Link to="/about">About Us</Link></li>
-          <li><Link to="/services">Services</Link></li>
-          <li><Link to="/blog">Blog</Link></li>
+          <li className={pathname==="/" ? 'active':''}><Link to="/">Home</Link></li>
+          <li className={pathname==="/shop" ? 'active':''}><Link to="/shop">Shop</Link></li>
+          <li className={pathname==="/about" ? 'active':''}><Link to="/about">About Us</Link></li>
+          {/* <li className={pathname==="/services" ? 'active':''}><Link to="/services">Services</Link></li> */}
+          <li className={pathname==="/blog" ? 'active':''}><Link to="/blog">Blog</Link></li>
         </ul>
 
         <div className="navbar-icons">
@@ -73,7 +79,7 @@ const Navbar = ({ setShowSignup }) => {
                 src={assets.Heart} // Replace with actual heart icon asset
                 alt="Wishlist"
                 className="icon wishlist-icon"
-                onClick={toggleWishlist}
+                onClick={toggleDrawer}
               />
 
               <img
@@ -84,10 +90,13 @@ const Navbar = ({ setShowSignup }) => {
               />
 
               {userDropdownOpen && (
-                <div className={`user-dropdown ${userDropdownOpen ? 'open' : ''}`}>
+                <div className={`user-dropdown ${userDropdownOpen ? 'open' : ''}`} onMouseLeave={()=>setUserDropdownOpen(false)}>
                   <ul>
                     <li>
                       <Link to="/cart">Shopping Bag</Link>
+                    </li>
+                    <li>
+                      <Link to="/personalDetails">Personal Details</Link>
                     </li>
                     <li>
                       <Link to="/profile">Profile</Link>
@@ -108,6 +117,26 @@ const Navbar = ({ setShowSignup }) => {
           closeWishlist={() => setWishlistOpen(false)}
         />
       )}
+      <Drawer anchor="right" open={isDrawerOpen} onClose={() => toggleDrawer()} 
+         sx={{
+          '& .MuiDrawer-paper': {
+           
+            height: '100%', // Full height
+            background: 'linear-gradient(#3b3b3b, rgba(0, 0, 0, 0.8))',// Semi-transparent background
+            backdropFilter: 'blur(15px)', // Blur effect
+            display: 'flex',
+            flexDirection: 'column',
+            color:'#fff',
+            padding: '20px',
+            overflowY: 'auto',
+            zIndex: 1300, // Ensure it's above other content
+          },
+         }}
+      >
+        <div style={{ width: 500, padding: 20 }}>
+          <CheckoutModal onClose={() => toggleDrawer()}/>
+        </div>
+      </Drawer>
     </>
   );
 };

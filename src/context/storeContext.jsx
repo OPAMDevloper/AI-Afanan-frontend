@@ -26,7 +26,13 @@ const StoreContextProvider = (props) => {
   const url = "https://al-afnan-backend-1.onrender.com";
   const [token, setToken] = useState("");
   const [cartItems, setCartItems] = useState({});
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false); // Drawer state
+  const [showSignup, setShowSignup] = useState(false); // Drawer state
 
+ // Function to open and close the drawer
+ const toggleDrawer = () => {
+  setIsDrawerOpen((prev) => !prev); // Toggle drawer state
+};
 
   // Load token from cookies on initial render
   useEffect(() => {
@@ -79,7 +85,11 @@ const StoreContextProvider = (props) => {
     setCartItems,
     addToCart,
     removeFromCart,
-    getTotalCartAmount
+    getTotalCartAmount,
+    toggleDrawer,
+    isDrawerOpen,
+    showSignup,
+    setShowSignup,
   };
 
   return (
