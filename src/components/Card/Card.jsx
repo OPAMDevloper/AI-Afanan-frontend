@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Box, Typography, Card as MUICard, CardContent, Button } from "@mui/material";
 import StarIcon from "@mui/icons-material/Star";
-import "./card.css";
+import "./Card.css";
 import "../../components/Hero/Hero.css";
 import { View } from "@react-three/drei";
 import Scene from "../../pages/SceneSix";
