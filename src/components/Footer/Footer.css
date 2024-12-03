@@ -10,19 +10,19 @@
     align-items: center;
   }
   
-  .footer-subscribe {
+  .footer-subscribes {
     max-width: 100%;
     margin-bottom: 30px;
     text-align: center;
   }
   
-  .footer-subscribe h2 {
+  .footer-subscribes h2 {
     font-size: 1.8rem;
     margin-bottom: 10px;
     color: #ff6f00;
   }
   
-  .footer-subscribe p {
+  .footer-subscribes p {
     margin-bottom: 15px;
   }
   
@@ -101,6 +101,7 @@
     color: white;
     text-decoration: none;
     transition: color 0.3s ease;
+    text-transform: capitalize;
   }
   
   .footer-column ul li a:hover {
@@ -128,7 +129,7 @@
       align-items: flex-start;
     }
   
-    .footer-subscribe {
+    .footer-subscribes {
       max-width: 300px;
       text-align: left;
     }
