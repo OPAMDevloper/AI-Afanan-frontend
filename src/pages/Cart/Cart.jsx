@@ -1,6 +1,6 @@
 // eslint-disable-next-line no-unused-vars
 import React, { useContext } from 'react'
-import './Cart.css'
+import './cart.css'
 import { StoreContext } from '../../context/storeContext'
 import { useNavigate } from 'react-router-dom'
 const Cart = () => {
