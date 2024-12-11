@@ -43,10 +43,10 @@ const Footer = () => {
             <button type="submit">Submit</button>
           </form>
           <div className="social-icons">
-            <a href="#"><FaFacebookF /></a>
-            <a href="#"><FaTwitter /></a>
-            <a href="#"><FaLinkedinIn /></a>
-            <a href="#"><FaInstagram /></a>
+            <a href="https://www.facebook.com/share/18iXoCFCpk/?mibextid=LQQJ4d" target='_blank'><FaFacebookF /></a>
+            {/* <a href="#"><FaTwitter /></a>
+            <a href="#"><FaLinkedinIn /></a> */}
+            <a href="https://www.instagram.com/al_afnan_perfume_factory/profilecard/?igsh=MTd4b2s1cWo5eTdybw==" target='_blank'><FaInstagram /></a>
           </div>
         </div>
 
@@ -71,8 +71,8 @@ const Footer = () => {
           <div className="footer-column">
             <h3>Customer care</h3>
             <ul>
-              <li><a href="#">+1 9999 9999</a></li>
-              <li><a href="#">perfumes@gmail.com</a></li>
+              <li><a href="#">03122374227</a></li>
+              <li><a href="#">alsaadalafnanelegant@gmail.com</a></li>
             </ul>
           </div>
           <div className="footer-column">
