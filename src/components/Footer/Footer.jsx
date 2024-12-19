@@ -24,7 +24,7 @@ const Footer = () => {
       });
       setCategories(response.data.data || []);
       if (response.data.data.length > 0) {
-        setSelectedCategory(response.data.data[0]); // Select the first category by default
+        // setSelectedCategory(response.data.data[0]); // Select the first category by default
       }
     } catch (error) {
       console.error("Error fetching categories:", error);

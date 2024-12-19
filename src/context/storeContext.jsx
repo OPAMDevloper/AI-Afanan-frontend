@@ -23,7 +23,7 @@ const deleteCookie = (name) => {
 export const StoreContext = createContext(null);
 
 const StoreContextProvider = (props) => {
-  const url = 'http://46.202.176.129:3002';
+  const url = 'https://46.202.176.129:3002';
   const [token, setToken] = useState("");
   const [cartItems, setCartItems] = useState({});
   const [isDrawerOpen, setIsDrawerOpen] = useState(false); // Drawer state

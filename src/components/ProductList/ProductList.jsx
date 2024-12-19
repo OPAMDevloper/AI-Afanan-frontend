@@ -8,7 +8,13 @@ import { Tabs, Tab } from "@mui/material";
 import Card from "../Card/Card";
 
 const ProductList = () => {
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState({
+    // data:[{
+    //   '_id':"789789",
+    //   name:'aliasgar',
+    //   price:"7897"
+    // }]
+  });
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("");
   const [page, setPage] = useState(1);

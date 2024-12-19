@@ -4,7 +4,7 @@ import StarIcon from "@mui/icons-material/Star";
 import "./Card.css";
 import "../../components/Hero/Hero.css";
 import { View } from "@react-three/drei";
-import Scene from "../../pages/SceneSix";
+import Scene from "../ProductList/Scene";
 
 const Card = ({
   name = "",
@@ -152,14 +152,12 @@ const Card = ({
           bottom:"20px",
           height: "100%",
           width: "50%",
-          zIndex: 1,
+          zIndex: 999,
           transform: "translate(10px, 10px)",
           transition: "transform 0.8s ease",
         }}
       >
-        <View className="Model">
           <Scene modelPath={modelPath} modelText={text} />
-        </View>
       </Box>
     </MUICard>
   );
