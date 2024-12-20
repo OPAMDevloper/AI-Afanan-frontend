@@ -6,7 +6,7 @@
     background-color: #00000090;
     display: grid;
     overflow-x: hidden;
-    z-index: 9;
+    z-index: 9999;
     top: 0;
 }
 
@@ -23,6 +23,7 @@
     border-radius: 8px;
     font-size: 14px;
     animation: fadeIn 0.5s;
+    z-index: 9999;
 
 }
 .loginPopTitle{

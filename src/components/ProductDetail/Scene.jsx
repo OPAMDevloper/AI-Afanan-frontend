@@ -1,148 +1,148 @@
-import { forwardRef, useRef, useImperativeHandle } from 'react';
-import { Environment, OrbitControls } from '@react-three/drei';
-import gsap from 'gsap';
-import { useGSAP } from '@gsap/react';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import FloatingModel from '../FloatingModel/FloatingModel';
+import { forwardRef, useRef, useImperativeHandle, useEffect } from "react";
+import { Environment } from "@react-three/drei";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Model from "../../components/NewModel";
+import { Canvas } from "@react-three/fiber";
 
-gsap.registerPlugin(useGSAP, ScrollTrigger);
+// Register the GSAP ScrollTrigger plugin
+gsap.registerPlugin(ScrollTrigger);
 
-const Scene = forwardRef(({ modelPath = '/blue_perfume_bottle1.glb' }, ref) => {
-  const model1Ref = useRef(null);
-  const groupRef = useRef(null);
-  const FLOAT_SPEED = 1.5;
-
-  // Expose a method to trigger the sinking animation from the parent
+const Scene = forwardRef(({ modelPath = "/blue_perfume_bottle1.glb" }, ref) => {
+  const modelRef = useRef(null);
+  const FLOAT_SPEED = 5;
+  const viewportHeight = window.innerHeight;
+    //Expose a method to trigger the sinking animation from the parent
   useImperativeHandle(ref, () => ({
     startSinking: () => {
       handleButtonClick();
     },
   }));
 
-  useGSAP(() => {
-    if (!model1Ref.current) return;
 
+  useEffect(() => {
+    if (!modelRef.current) return;
     // Initial position for the model
-    const initialPosition = { x: 0, y: 0.51, z: 1 };
-    gsap.set(model1Ref.current.position, initialPosition);
-    gsap.set(model1Ref.current.rotation, { x: 0, y: 0.5, z: 0 });
-
-    // Scroll-based animations
+    const initialPosition = { x: 0, y: 0, z: 0 };
+    gsap.set(modelRef.current.position, initialPosition);
+    const container = document.querySelector(".Model-container");
+    console.log(container,'container'); // Should log the element
+    if (!container) return;    // Scroll-based animations
     const scrollTl = gsap.timeline({
       defaults: {
         duration: 0, // No duration for immediate scroll sync
       },
       scrollTrigger: {
-        trigger: '.hero-container', // The scroll container
-        start: 'top top', // Start when the top of the container hits the top of the viewport
-        end: '+=1000', // Limit scroll effect to 1000px
-        scrub: 0.5, // Adjust the speed of the scroll (lower is slower)
-        pin: true, // Pin the model in place after it reaches the stopping point
+        trigger: ".Model-container", // The container for scroll interaction
+        start: `top top`, // Start at 50% of the viewport height
+        end: `bottom top`, //ps 100px from the bottom of the viewport
+        scrub: true, // Smooth scrolling effect
+        pin: true, // Pin the model during the scroll
+        pinSpacing: true,
         immediateRender: true,
-        ease: 'power1.inOut',
-        onUpdate: ({ progress }) => {
-          if (progress > 1) {
-            gsap.set(model1Ref.current.position, { y: -1 });
-          }
-        },
+        ease: "power1.inOut",
       },
     });
 
-    scrollTl
-      .to(model1Ref.current.position, { y: -0.8, duration: 30, ease: 'power1.inOut' }, 0)
-      .to(model1Ref.current.rotation, { z: 0 }, 0);
+    scrollTl.to(modelRef.current.position,
+      { y: -0.8, duration: 30, ease: "power1.inOut" },
+      0
+    );
 
-    gsap.to(model1Ref.current.rotation, {
+    // Infinite rotation
+    gsap.to(modelRef.current.rotation, {
       y: Math.PI * 2,
-      duration: 3,
-      repeat: -1, // Infinite rotation
-      ease: 'power1.inOut',
+      duration: 2.5,
+      repeat: -1,
+      ease: "linear",
     });
-
     ScrollTrigger.create({
-      trigger: '.attend',
-      start: 'top center',
-      end: '+=1500',
+      trigger: container,
+      start: "top center",
+      end: "+=200",
       onEnter: () => {
-        gsap.to(model1Ref.current.position, { y: model1Ref.current.position.y, ease: 'power1.inOut' });
+        gsap.to(modelRef.current.position, {
+          y: modelRef.current.position.y,
+          ease: "power1.inOut",
+        });
       },
       onLeave: () => {
-        gsap.to(model1Ref.current.position, { y: -0.8, ease: 'power1.inOut' });
+        gsap.to(modelRef.current.position, { y: -0.8, ease: "power1.inOut" });
       },
       scrub: true,
     });
-  }, []);
 
-  // Function to handle the button click animation (sinking effect)
-// Function to handle the button click animation (sinking effect)
-const handleButtonClick = () => {
-  if (model1Ref.current) {
-    const targetPosition = { x: 0, y: -2, z: 0 }; // Target sinking position
-    const originalPosition = { x: 0, y: 0.51, z: 1 }; // Original position
-    const originalScale = { x: 0.5, y: 0.5, z: 0.5 }; // Original scale
+    return () => {
+      scrollTl?.kill(); // Kills only this animation's ScrollTrigger
+      ScrollTrigger.getAll().forEach(trigger => trigger.kill()); // Clean up all ScrollTriggers
+    };
+  }, [modelRef, modelPath,viewportHeight]);
+  const handleButtonClick = () => {
+    if (modelRef.current) {
+      const targetPosition = { y: -2.8, x: 0, z:0, }; // Target sinking position
+      const originalPosition = { y: 0, x: 0, z:0 }; // Original position
+      const originalScale = { x: 0.8, y: 0.8, z: 0.8 }; // Original scale
 
-    // Move the model into the button and scale it down
-    gsap.to(model1Ref.current.position, {
-      x: targetPosition.x,
-      y: targetPosition.y,
-      z: targetPosition.z,
-      duration: 5,
-      ease: 'power2.out',
-      onComplete: () => {
-        // Return model to its original position and scale after animation completes
-        gsap.to(model1Ref.current.position, {
-          x: originalPosition.x,
-          y: originalPosition.y,
-          z: originalPosition.z,
-          duration: 1,
-          ease: 'power2.inOut',
-        });
+      // Move the model into the button and scale it down
+      gsap.to(modelRef.current.position, {
+        x: targetPosition.x,
+        y: targetPosition.y,
+        z: targetPosition.z,
+        duration: 3,
+        ease: "power2.out",
+        onComplete: () => {
+          // Return model to its original position and scale after animation completes
+          gsap.to(modelRef.current.position, {
+            x: originalPosition.x,
+            y: originalPosition.y,
+            z: originalPosition.z,
+            duration: 1,
+            ease: "power2.inOut",
+          });
 
-        gsap.to(model1Ref.current.scale, {
-          x: originalScale.x,
-          y: originalScale.y,
-          z: originalScale.z,
-          duration: 1,
-          ease: 'power2.inOut',
-        });
+          gsap.to(modelRef.current.scale, {
+            x: originalScale.x,
+            y: originalScale.y,
+            z: originalScale.z,
+            duration: 1,
+            ease: "power2.inOut",
+          });
 
-        // Restore opacity
-        gsap.to(model1Ref.current, {
-          opacity: 1,
-          duration: 0.5,
-        });
-      },
-    });
+          // Restore opacity
+          gsap.to(modelRef.current, {
+            opacity: 1,
+            duration: 0.5,
+          });
+        },
+      });
 
-    gsap.to(model1Ref.current.scale, {
-      x: 0.1,
-      y: 0.1,
-      z: 0.1,
-      duration: 1.5,
-      ease: 'power2.out',
-    });
+      gsap.to(modelRef.current.scale, {
+        x: 0.1,
+        y: 0.1,
+        z: 0.1,
+        duration: 1.5,
+        ease: "power2.out",
+      });
 
-    // Fade out the model (disappear effect)
-    gsap.to(model1Ref.current, {
-      opacity: 0,
-      duration: 1,
-      delay: 0.5,
-    });
-  }
-};
-
+      // Fade out the model (disappear effect)
+      gsap.to(modelRef.current, {
+        opacity: 0,
+        duration: 1,
+        delay: 0.5,
+      });
+    }
+  };
 
   return (
-    <group ref={groupRef}>
-      <FloatingModel
-        ref={model1Ref}
-        modelPath={modelPath}
-        floatspeed={FLOAT_SPEED}
-        scale={[0.5, 0.5, 0.5]} // Adjust the size for around 100px height
-      />
-      <Environment files='/hdr/lobby.hdr' environmentIntensity={1.5} />
-      <OrbitControls />
-    </group>
+      <Canvas>
+        <Model
+          ref={modelRef}
+          modelPath={modelPath}
+          floatspeed={FLOAT_SPEED}
+          scale={[1.5, 1.5, 1.5]} // Adjust the size for your requirements
+        />
+        <Environment files="/hdr/lobby.hdr" environmentIntensity={1.5} />
+      </Canvas>
   );
 });
 

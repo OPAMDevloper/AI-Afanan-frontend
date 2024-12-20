@@ -38,12 +38,15 @@ const App = () => {
           <Route path="/about" element={<About />} />
           <Route path="/wishlist" element={<Wishlist />} />
           <Route path="/blog" element={<BlogAll />} />
-          <Route path="/product/:id" element={<ProductDetail />} /> {/* Route for ProductDetail */}
+         
           {/* <Route path="/cart" element={<Cart />} /> */}
           <Route path="/profile" element={<Profile />} />
           <Route path="/personalDetails" element={<ProfilePage />} />
         </Routes>
       </Suspense>
+      <Routes>
+      <Route path="/product/:id" element={<ProductDetail />} /> {/* Route for ProductDetail */}
+      </Routes>
     </>
   );
 };

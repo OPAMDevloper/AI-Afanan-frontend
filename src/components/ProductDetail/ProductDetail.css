@@ -203,3 +203,18 @@
   cursor: pointer;
   border-radius: 5px;
 }
+.Model-Wrapper {
+  /* position:'' */
+  width: 100%;
+}
+.Model-container {
+  position: absolute; /* Ensures it scrolls with the page */
+  top: 0; /* Initial position from the top */
+  left: 50%; /* Center it horizontally */
+  transform: translateX(-50%); /* Adjust for centering */
+  margin: auto;
+  width: 200px;
+  height: 750px;
+  z-index: 9;
+  pointer-events: none; /* Optional, depending on interaction requirements */
+}

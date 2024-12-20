@@ -1,27 +1,24 @@
-import { useState, useEffect, useContext, useCallback, useRef } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import axios from "axios";
-import { StoreContext } from "../../context/storeContext";
-import Loader from "../Loader/Loader"; // Assuming you have a custom Loader component
-import "./ProductDetail.css";
-import { View } from "@react-three/drei";
 import { AddShoppingCart } from "@mui/icons-material";
-import {
-  Box,
-  Typography,
-  Button,
-  Tabs,
-  Tab,
-  Rating,
-  CardContent,
-} from "@mui/material";
-import StarBorderOutlinedIcon from "@mui/icons-material/StarBorderOutlined";
 import AccessTimeOutlinedIcon from "@mui/icons-material/AccessTimeOutlined";
 import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
-import { useSpring, animated } from "react-spring";
-import Card from "../Card/Card";
-import Scene from "./Scene";
+import StarBorderOutlinedIcon from "@mui/icons-material/StarBorderOutlined";
+import {
+  Box,
+  Button,
+  Rating,
+  Tab,
+  Tabs,
+  Typography
+} from "@mui/material";
+import axios from "axios";
+import { useCallback, useContext, useEffect, useRef, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { animated } from "react-spring";
+import { StoreContext } from "../../context/storeContext";
 import { addToCart } from "../../Helper/Profile";
+import Card from "../Card/Card";
+import "./ProductDetail.css";
+import Scene from "./Scene";
 
 const ProductDetail = () => {
   const { id } = useParams();
@@ -117,22 +114,19 @@ const ProductDetail = () => {
 
   return (
     <>
-      <div className="view-container">
-        <View
-          className="Model"
-          style={{
-            height: "1350px",
-          }}
-        >
-          <Scene
-            ref={sceneRef}
-            modelPath={
-              product?.imageModel
-                ? `${url}/${product?.imageModel}`
-                : "/purple_perfume_bottle1.glb"
+    <div>
+    <div className="Model-container" >
+        <Scene
+          ref={sceneRef}
+          modelPath={
+            product?.imageModel
+              ? `${url}/${product?.imageModel}`
+              : 
+              "/open.glb"
             }
-          />
-        </View>
+            />
+            </div>
+      <div className="view-container">
 
         <Box
           sx={{ backgroundColor: "#000", color: "#fff", minHeight: "100vh" }}
@@ -439,6 +433,7 @@ const ProductDetail = () => {
               padding: "10px",
               marginTop: "16px",
               marginBottom: "20px",
+              zIndex:999,
               margin: "auto",
               "&:hover": {
                 backgroundColor: "#FF6347", // On hover background color changes to orange
@@ -451,6 +446,7 @@ const ProductDetail = () => {
             Add to Bag
           </Button>
         </Box>
+      </div>
       </div>
     </>
   );

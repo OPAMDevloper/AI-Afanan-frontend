@@ -26,7 +26,7 @@ const Model = forwardRef(
             floatIntensity={1} // Up/down float intensity, works like a multiplier with floatingRange, defaults to 1
             floatingRange={[-0.01, 0.01]}
           >
-            <Suspense fallback={null}>
+            <Suspense fallback={<div>test loadiung</div>}>
               <primitive object={scene} />
             </Suspense>
           </Float>
