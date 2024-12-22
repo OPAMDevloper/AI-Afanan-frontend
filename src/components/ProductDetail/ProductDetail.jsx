@@ -120,7 +120,7 @@ const ProductDetail = () => {
           ref={sceneRef}
           modelPath={
             product?.imageModel
-              ? `${url}/${product?.imageModel}`
+              ? `/${product?.imageModel}`
               : 
               "/open.glb"
             }
@@ -371,7 +371,7 @@ const ProductDetail = () => {
                   type={"Perfume"}
                   modelPath={
                     products[0].imageModel
-                      ? `${url}/${products[0].imageModel}`
+                      ? `/${products[0].imageModel}`
                       : "/purple_perfume_bottle1.glb"
                   }
                   text="Your product Description"
@@ -410,7 +410,7 @@ const ProductDetail = () => {
                   type={"Perfume"}
                   modelPath={
                     products[1].imageModel
-                      ? `${url}/${products[1].imageModel}`
+                      ? `/${products[1].imageModel}`
                       : "/purple_perfume_bottle1.glb"
                   }
                   text="Your product Description"

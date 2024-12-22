@@ -104,7 +104,7 @@ const CheckoutModal = ({onClose}) => {
       <>
       <ListItem key={index} sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <Box sx={{ display: 'flex', alignItems: 'center' ,color:'#fff'}}>
-          <img src={`${url}/${item.image}`} alt={item.name} style={{ width: 40, height: 40, marginRight: 10 }} />
+          <img src={`/${item.image}`} alt={item.name} style={{ width: 40, height: 40, marginRight: 10 }} />
           <ListItemText
             primary={item.name}
             secondary={`Qty: ${item.quantity} | M.R.P: ₹${item.price}`}

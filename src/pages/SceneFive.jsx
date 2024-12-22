@@ -82,7 +82,7 @@ const Scene = () => {
   return (
     <group ref={groupRef}>
       {modelPath && (
-        <FloatingModel ref={model1Ref} modelPath={`${url}/${modelPath}`} floatspeed={FLOAT_SPEED} />
+        <FloatingModel ref={model1Ref} modelPath={`/${modelPath}`} floatspeed={FLOAT_SPEED} />
       )}
       <Environment files="/hdr/lobby.hdr" environmentIntensity={1.5} />
       <OrbitControls />

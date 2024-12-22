@@ -23,3 +23,5 @@
 # *.sln
 # *.sw?
 node_modules
+/build
+/dist

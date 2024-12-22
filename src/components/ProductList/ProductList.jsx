@@ -126,7 +126,7 @@ const ProductList = () => {
                     name={product.name}
                     price={product.price}
                     type={"Perfume"}
-                    modelPath={product.imageModel ? `${url}/${product.imageModel}` : "/purple_perfume_bottle1.glb"}
+                    modelPath={product.imageModel ? `/${product.imageModel}` : "/purple_perfume_bottle1.glb"}
                     text="Your Product Description"
                     onClick={() => handleProductClick(product._id)}
                   />

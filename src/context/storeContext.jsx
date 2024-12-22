@@ -23,7 +23,7 @@ const deleteCookie = (name) => {
 export const StoreContext = createContext(null);
 
 const StoreContextProvider = (props) => {
-  const url = 'https://alafnanperfume.com';
+  const url = '/api';
   const [token, setToken] = useState("");
   const [cartItems, setCartItems] = useState({});
   const [isDrawerOpen, setIsDrawerOpen] = useState(false); // Drawer state
