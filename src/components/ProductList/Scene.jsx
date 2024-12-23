@@ -1,7 +1,7 @@
 import { Environment } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import gsap from "gsap";
-import { useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import Model from "../../components/NewModel";
 
 const Scene = ({ modelPath }) => {
@@ -61,10 +61,10 @@ const Scene = ({ modelPath }) => {
           scale={[2.5, 2.5, 2.5]}
           position={[0, 0.05, 0]} // Adjust position here: [x, y, z]
         />
-        <Environment files="/hdr/field.hdr" environmentIntensity={1.5} />
+        <Environment files="/hdr/lobby.hdr" environmentIntensity={1.5} />
       </Canvas>
     </group>
   );
 };
 
-export default Scene;
+export default React.memo(Scene);

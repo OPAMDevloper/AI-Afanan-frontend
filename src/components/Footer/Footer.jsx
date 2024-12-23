@@ -23,7 +23,7 @@ const Footer = () => {
         },
       });
       setCategories(response.data.data || []);
-      if (response.data.data.length > 0) {
+      if (response?.data?.data?.length > 0) {
         // setSelectedCategory(response.data.data[0]); // Select the first category by default
       }
     } catch (error) {
@@ -89,7 +89,7 @@ const Footer = () => {
       </div>
 
       {/* Divider line */}
-      <hr />
+      <hr style={{margin:"10px 0"}}/>
 
       <div className="footer-bottom">
         <p>© 2023 Local Face Inc. All rights reserved.</p>

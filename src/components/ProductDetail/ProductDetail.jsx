@@ -69,7 +69,8 @@ const ProductDetail = () => {
   }, []);
 
   const handleProductClick = (productId) => {
-    navigate(`/product/${productId}`);
+    window.location.href=`/product/${productId}`
+    // navigate(`/product/${productId}`);
   };
 
   const fetchProducts = useCallback(async () => {
@@ -129,7 +130,7 @@ const ProductDetail = () => {
       <div className="view-container">
 
         <Box
-          sx={{ backgroundColor: "#000", color: "#fff", minHeight: "100vh" }}
+          sx={{ backgroundColor: "#000", color: "#fff", minHeight: "100vh",paddingBottom:'10px' }}
         >
           <Box
             sx={{

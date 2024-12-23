@@ -214,7 +214,7 @@
   transform: translateX(-50%); /* Adjust for centering */
   margin: auto;
   width: 200px;
-  height: 750px;
+  height: 700px;
   z-index: 9;
   pointer-events: none; /* Optional, depending on interaction requirements */
 }

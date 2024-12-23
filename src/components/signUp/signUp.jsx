@@ -4,6 +4,7 @@ import { assets } from '../../assets/assets';
 import { StoreContext } from '../../context/storeContext';
 import axios from 'axios';
 import Loader from '../Loader/Loader';
+import { ToastContainer } from 'react-toastify';
 
 const Signup = () => {
     const [currentState, setCurrentState] = useState("Login");
@@ -38,12 +39,22 @@ const Signup = () => {
                 } else {
                     setCurrentState("Login"); // Move to Login state after successful registration
                 }
+                  toast.success("Logged In sucessfully");
+                   
+                    
             } else {
-                alert(response.data.message);
+                toast.error(response.data.message);
             }
             
            
         } catch (error) {
+            if (currentState === "Sign Up") {
+                toast.error("Error during signup");
+                
+            }else{
+                toast.error("Error during login");
+
+            }
             console.error("Error during login/signup", error);
         } finally {
             setLoading(false);
@@ -56,7 +67,11 @@ const Signup = () => {
             <form onSubmit={onLogin} className="loginPopcon">
                 <div className="loginPopTitle">
                     <h2>{currentState}</h2>
-                    <img onClick={() => setShowSignup(false)} src={assets.crossIcon} alt="Close" />
+                    <img style={{
+                        border: '2px solid #ff6347',
+                        borderRadius: '25px',
+                        padding: '3px',
+                    }} onClick={() => setShowSignup(false)} src={assets.crossIcon} alt="Close" />
                 </div>
                 <div className="loginPopInput">
                     {currentState === "Sign Up" && (
@@ -76,6 +91,8 @@ const Signup = () => {
                     <p>Already have an account? <span onClick={() => setCurrentState("Login")}>Login here</span></p>
                 )}
             </form>
+            
+                  <ToastContainer />
         </div>
     );
 };

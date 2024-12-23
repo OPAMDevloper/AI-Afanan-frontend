@@ -9,7 +9,7 @@ import Card from "../Card/Card";
 
 const ProductList = () => {
   const [products, setProducts] = useState({
-    // data:[{
+        // data:[{
     //   '_id':"789789",
     //   name:'aliasgar',
     //   price:"7897"
@@ -126,7 +126,7 @@ const ProductList = () => {
                     name={product.name}
                     price={product.price}
                     type={"Perfume"}
-                    modelPath={product.imageModel ? `/${product.imageModel}` : "/purple_perfume_bottle1.glb"}
+                    modelPath={product?.imageModel ? `/${product.imageModel}` : "/purple_perfume_bottle1.glb"}
                     text="Your Product Description"
                     onClick={() => handleProductClick(product._id)}
                   />
@@ -140,6 +140,9 @@ const ProductList = () => {
             {products?.isPrevPage && <button onClick={handlePreviousPage} disabled={page === 1}>
               Previous
             </button>}
+            {Array.from({ length:products?.totalPages ??0 }, (_, i) => i + 1)?.map((el)=>{
+              return  <button onClick={()=>setPage(el)} style={{backgroundColor:`${products?.page===el?'#ab572d':'#fff'}`}}>{el}</button>
+            })}
             {products?.isNextPage && <button onClick={handleNextPage}>Next</button>}
             
           </div>

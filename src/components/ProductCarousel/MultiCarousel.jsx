@@ -51,7 +51,7 @@ const MultiCarousel = ({ itemsPerSlide = 3 }) => {
             {slideItems.map((item, index) => (
               <div className="carousel-item" key={item._id || index}>
                 <img
-                  src={`${url}/${item.image}`}
+                  src={`/${item.image}`}
                   alt={item.name}
                   className="carousel-item-image"
                 />

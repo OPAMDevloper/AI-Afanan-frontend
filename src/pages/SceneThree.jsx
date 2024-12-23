@@ -23,7 +23,7 @@ const Scene = () => {
     '/black_perfume_bottle1.glb',
   ];
 
-  // Detect screen size changes
+  //Detect screen size changes
   useEffect(() => {
     const handleResize = () => {
       setIsMobileOrTablet(window.innerWidth < 1026); // Adjust the width as needed for tablet/mobile
@@ -75,16 +75,16 @@ const Scene = () => {
     } else {
       // Animation for desktop view (all 5 models)
       scrollTl
-        .to(model1Ref.current.position, { x: -0.8, y: -0.2, z: 0.8 }, 0)
-        .to(model1Ref.current.rotation, { z: -0.3 }, 0)
-        .to(model2Ref.current.position, { x: -1.4, y: -0.2, z: 0.8 }, 0)
-        .to(model2Ref.current.rotation, { z: 0.3 }, 0)
-        .to(model3Ref.current.position, { x: -1.8, y: 0.3, z: 0.2 }, 0)
-        .to(model3Ref.current.rotation, { z: 0.2 }, 0)
-        .to(model4Ref.current.position, { x: -0.8, y: -0.1, z: 1.8 }, 0)
-        .to(model4Ref.current.rotation, { z: 0 }, 0)
-        .to(model5Ref.current.position, { x: -0.7, y: 0.3, z: 0.2 }, 0)
-        .to(model5Ref.current.rotation, { z: -0.25 }, 0);
+        .to(model1Ref.current.position, { x: -1.7, y: 0, z: 0.8 }, 0)
+        .to(model1Ref.current.rotation, { y:0.6 }, 0)
+        .to(model2Ref.current.position, { x: -1.3, y: -0.2, z: 0.8 }, 0)
+        .to(model2Ref.current.rotation, { duration:1}, 0)
+        .to(model3Ref.current.position, { x: -0.9, y: -0.4, z: 0.8 }, 0)
+        .to(model3Ref.current.rotation, { duration:1 }, 0)
+        .to(model4Ref.current.position, { x: -0.5, y: -0.2, z: 0.8 }, 0)
+        .to(model4Ref.current.rotation, { duration:1 }, 0)
+        .to(model5Ref.current.position, { x: 0, y: 0, z: 0.8 }, 0)
+        .to(model5Ref.current.rotation, { duration:1 }, 0);
     }
   }, [isMobileOrTablet]);
 

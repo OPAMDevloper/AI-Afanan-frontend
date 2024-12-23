@@ -1,12 +1,15 @@
 .hero-container {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
+    flex-direction: column;
     justify-content: flex-start; /* Align content to the left */
     padding: 50px;
     background-color: #000000; /* Dark background */
     color: #fff; /* White text color */
     min-height: 100vh; /* Set height to 100vh to fill the screen */
     position: relative; /* Default relative positioning */
+    background-image: url("../../assets/dashboardImage.jpg");
+    background-size: cover;
 }
 
 .hero-content {

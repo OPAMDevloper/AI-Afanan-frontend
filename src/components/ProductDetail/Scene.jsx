@@ -11,7 +11,6 @@ gsap.registerPlugin(ScrollTrigger);
 const Scene = forwardRef(({ modelPath = "/blue_perfume_bottle1.glb" }, ref) => {
   const modelRef = useRef(null);
   const FLOAT_SPEED = 5;
-  const viewportHeight = window.innerHeight;
     //Expose a method to trigger the sinking animation from the parent
   useImperativeHandle(ref, () => ({
     startSinking: () => {
@@ -76,12 +75,12 @@ const Scene = forwardRef(({ modelPath = "/blue_perfume_bottle1.glb" }, ref) => {
       scrollTl?.kill(); // Kills only this animation's ScrollTrigger
       ScrollTrigger.getAll().forEach(trigger => trigger.kill()); // Clean up all ScrollTriggers
     };
-  }, [modelRef, modelPath,viewportHeight]);
+  }, [modelPath]);
   const handleButtonClick = () => {
     if (modelRef.current) {
-      const targetPosition = { y: -2.8, x: 0, z:0, }; // Target sinking position
+      const targetPosition = { y: -4.8, x: 0, z:0, }; // Target sinking position
       const originalPosition = { y: 0, x: 0, z:0 }; // Original position
-      const originalScale = { x: 0.8, y: 0.8, z: 0.8 }; // Original scale
+      const originalScale = { x: 1.5, y: 1.5, z: 1.5 }; // Original scale
 
       // Move the model into the button and scale it down
       gsap.to(modelRef.current.position, {
@@ -91,14 +90,16 @@ const Scene = forwardRef(({ modelPath = "/blue_perfume_bottle1.glb" }, ref) => {
         duration: 3,
         ease: "power2.out",
         onComplete: () => {
+          const initialPosition = { x: 0, y: 0, z: 0 };
+          gsap.set(modelRef.current.position, initialPosition);
           // Return model to its original position and scale after animation completes
-          gsap.to(modelRef.current.position, {
-            x: originalPosition.x,
-            y: originalPosition.y,
-            z: originalPosition.z,
-            duration: 1,
-            ease: "power2.inOut",
-          });
+          // gsap.to(modelRef.current.position, {
+          //   x: originalPosition.x,
+          //   y: originalPosition.y,
+          //   z: originalPosition.z,
+          //   duration: 1,
+          //   ease: "power2.inOut",
+          // });
 
           gsap.to(modelRef.current.scale, {
             x: originalScale.x,
@@ -108,11 +109,11 @@ const Scene = forwardRef(({ modelPath = "/blue_perfume_bottle1.glb" }, ref) => {
             ease: "power2.inOut",
           });
 
-          // Restore opacity
-          gsap.to(modelRef.current, {
-            opacity: 1,
-            duration: 0.5,
-          });
+          // // Restore opacity
+          // gsap.to(modelRef.current, {
+          //   opacity: 1,
+          //   duration: 0.5,
+          // });
         },
       });
 
