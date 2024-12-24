@@ -11,7 +11,7 @@
     justify-content: center;
     background-color: rgba(0, 0, 0, 0.5); /* Transparent black background */
     backdrop-filter: blur(1px); /* Blurred background */
-    z-index: 9999; /* Ensure it is above all other elements */
+    z-index: 99999; /* Ensure it is above all other elements */
 }
 
 .spinner {

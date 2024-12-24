@@ -1,5 +1,5 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -12,10 +12,23 @@ export default defineConfig({
     alias: {
       '@': '/src',
     },
-
-    server: {
-      port: Number(process.env.VITE_APP_PORT) || 3004,
-      host: process.env.VITE_APP_HOST || '0.0.0.0'
+  // },
+  server: {
+    port: Number(process.env.VITE_APP_PORT) || 3004,
+    host: process.env.VITE_APP_HOST || '0.0.0.0',
+    // proxy: {
+    //   // Proxy for API requests with `/api`
+    //   '/api': {
+    //     target: 'https://alafnanperfume.com/',
+    //     changeOrigin: true,
+    //     secure: false,
+    //   },
+    //   // Proxy for requests without `/api` in the URL
+    //   '^/(?!api)': {
+    //     target: 'https://alafnanperfume.com',
+    //     changeOrigin: true,
+    //     secure: false,
+    //   },
     },
   },
 });

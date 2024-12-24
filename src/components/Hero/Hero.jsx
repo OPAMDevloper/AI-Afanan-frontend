@@ -20,10 +20,10 @@ const Hero = () => {
           Shop Now
         </button>
       </div>
-      <div className="ModelContainer" style={{ display: "flex", width:'50%',height:'500px' }}>
+      <div className="ModelContainer" style={{ display: "flex", width:'50%' ,  flex:3}}>
         <Canvas style={{ width: "100%", height: "100%" }}>
           {/* Add spacing between models */}
-          <Scene modelPath="/open.glb" position={[-3, 0, 0]} rotationSpeed={0.01} />
+          <Scene modelPath="/open.glb" position={[-3, 0, 0]} rotationSpeed={0.06} />
           <Scene modelPath="/Aseel.glb" position={[0, 0, 0]} rotationSpeed={0.015} />
           <Scene modelPath="/Dubai_Nights.glb" position={[3, 0, 0]} rotationSpeed={0.02} />
           <Environment files="/hdr/lobby.hdr" intensity={1.5} />

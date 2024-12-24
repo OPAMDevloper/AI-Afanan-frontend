@@ -4,7 +4,9 @@ import { assets } from '../../assets/assets';
 import { StoreContext } from '../../context/storeContext';
 import axios from 'axios';
 import Loader from '../Loader/Loader';
-import { ToastContainer } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const Signup = () => {
     const [currentState, setCurrentState] = useState("Login");

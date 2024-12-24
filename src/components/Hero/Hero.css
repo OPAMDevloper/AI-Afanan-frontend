@@ -1,34 +1,41 @@
 .hero-container {
-    display: flex;
-    align-items: flex-start;
-    flex-direction: column;
-    justify-content: flex-start; /* Align content to the left */
-    padding: 50px;
-    background-color: #000000; /* Dark background */
-    color: #fff; /* White text color */
-    min-height: 100vh; /* Set height to 100vh to fill the screen */
-    position: relative; /* Default relative positioning */
-    background-image: url("../../assets/dashboardImage.jpg");
-    background-size: cover;
+        display: flex;
+        align-items: flex-start;
+        flex-direction: column;
+        justify-content: flex-start;
+        padding: 25px;
+        background-color: #000;
+        color: #fff;
+        height: calc(100vh - 65px); /* Set div height to 60% of viewport height */
+        position: relative;
+        background-image: url("../../assets/dashboardImage.jpg");
+        background-size: cover; /* Ensure image covers the div but doesn't stretch */
+        background-position: center; /* Center the background image */
+        background-repeat: no-repeat; /* Prevent repeating of the background image */
+        background-attachment: scroll; /* Prevent background from being fixed */
+        overflow: hidden; /* Prevent overflow of content outside the div */
+      
 }
 
 .hero-content {
     width: 50%; /* Limit content width */
     text-align: left; /* Ensure text aligns to the left */
     filter: drop-shadow(4px 4px 100px #ffffff);
+    flex:2;
+    overflow: hidden;
     
 }
 
 .hero-content h1 {
-    font-size: 3rem;
+    font-size: 3vw;
     font-weight: 300;
-    margin-bottom: 20px;
+    margin-bottom: 5px;
     filter: drop-shadow(1px 1px 300px rgba(255, 255, 255, 0.8));
 }
 
 .hero-content p {
-    font-size: 2rem;
-    margin-bottom: 40px;
+    font-size: 1.5vw;
+    margin-bottom: 10px;
 }
 
 .hero-btn {

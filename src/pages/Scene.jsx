@@ -19,7 +19,7 @@ const Scene = ({ modelPath, position = [0, 0, 0], rotationSpeed = 0.01 }) => {
       ref={modelRef} 
       object={scene} 
       position={position} 
-      scale={[1.5, 1.5, 1.5]} 
+      scale={[2, 2, 2]} 
     />
   );
 };
