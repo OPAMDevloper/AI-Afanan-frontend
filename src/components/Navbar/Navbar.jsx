@@ -4,7 +4,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { useContext, useState } from 'react';
 import Wishlist from '../../pages/Wishlist/WishList';
 import { StoreContext } from '../../context/storeContext';
-import { Button, Drawer } from '@mui/material';
+import { Drawer } from '@mui/material';
 import CheckoutModal from '../CheckoutModal/CheckoutModal';
 
 const Navbar = () => {
@@ -22,15 +22,15 @@ const Navbar = () => {
   const toggleMenu = () => setMenuOpen(!menuOpen);
   const toggleSearch = () => setSearchOpen(!searchOpen);
   const toggleUserDropdown = () => setUserDropdownOpen(!userDropdownOpen);
-  const toggleWishlist = () => setWishlistOpen(!wishlistOpen);
+  // const toggleWishlist = () => setWishlistOpen(!wishlistOpen);
 
   const handleLogout = () => {
     setToken('');
     setUserDropdownOpen(false);
   };
   const location = useLocation();
-  const { hash, pathname, search } = location;
-  console.log(pathname,'pathname');
+  // const { hash, pathname, search } = location;
+  const { pathname } = location;
   
 
   return (
@@ -43,11 +43,12 @@ const Navbar = () => {
         </div>
 
         <ul className={menuOpen ? 'navbar-links active' : 'navbar-links'}>
-          <li className={pathname==="/" ? 'active':''}><Link to="/">Home</Link></li>
-          <li className={pathname==="/shop" ? 'active':''}><Link to="/shop">Shop</Link></li>
-          <li className={pathname==="/about" ? 'active':''}><Link to="/about">About Us</Link></li>
+          {menuOpen&&<div className="close-icon" onClick={toggleMenu}><img src={assets.crossIcon} alt="" /></div>}
+          <li className={pathname==="/" ? 'active':''} onClick={menuOpen?toggleMenu:undefined}><Link to="/">Home</Link></li>
+          <li className={pathname==="/shop" ? 'active':''} onClick={menuOpen?toggleMenu:undefined}><Link to="/shop">Shop</Link></li>
+          <li className={pathname==="/about" ? 'active':''} onClick={menuOpen?toggleMenu:undefined}><Link to="/about">About Us</Link></li>
           {/* <li className={pathname==="/services" ? 'active':''}><Link to="/services">Services</Link></li> */}
-          <li className={pathname==="/blog" ? 'active':''}><Link to="/blog">Blog</Link></li>
+          <li className={pathname==="/blog" ? 'active':''} onClick={menuOpen?toggleMenu:undefined}><Link to="/blog">Blog</Link></li>
         </ul>
 
         <div className="navbar-icons">
@@ -58,7 +59,7 @@ const Navbar = () => {
           <img
             src={assets.MagnifyingGlass}
             alt="Search"
-            className="icon"
+            className="icon search-icon"
             onClick={toggleSearch}
           />
           {searchOpen && (
