@@ -1,11 +1,10 @@
-import React from 'react';
 import './About.css'; // Import CSS for styling
 import aboutImage from '../../assets/About.png'; // Import background image
 
 const About = () => {
   return (
     <>
-      <div className="breadcrumb">Home / About</div>
+      {/* <div className="breadcrumb">Home / About</div> */}
 
       <div className="about-container" id='About'>
         {/* Background Image */}

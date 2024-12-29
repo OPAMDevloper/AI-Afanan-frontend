@@ -39,32 +39,29 @@ const MultiCarousel = ({ itemsPerSlide = 3 }) => {
     : [];
 
   return (
-    <div className="carousel-container">
+    <div className={`${slideItems.length != 0 && "carousel-container"}`}>
       {loading ? (
         <Loader /> // Show loader while loading
       ) : (
-        <>
-          <button className="carousel-button left" onClick={prevSlide}>
+        slideItems.length != 0 && (
+          <><button className="carousel-button left" onClick={prevSlide}>
             &#10094;
-          </button>
-          <div className="carousel-slide">
-            {slideItems.map((item, index) => (
-              <div className="carousel-item" key={item._id || index}>
-                <img
-                  src={`/${item.image}`}
-                  alt={item.name}
-                  className="carousel-item-image"
-                />
-                <h3>{item.name}</h3>
-                <p>Price: ${item.price}</p>
-                <p>Discount Price: ${item.discountPrice}</p>
-              </div>
-            ))}
-          </div>
-          <button className="carousel-button right" onClick={nextSlide}>
-            &#10095;
-          </button>
-        </>
+          </button><div className="carousel-slide">
+              {slideItems.map((item, index) => (
+                <div className="carousel-item" key={item._id || index}>
+                  <img
+                    src={`/${item.image}`}
+                    alt={item.name}
+                    className="carousel-item-image" />
+                  <h3>{item.name}</h3>
+                  <p>Price: ${item.price}</p>
+                  <p>Discount Price: ${item.discountPrice}</p>
+                </div>
+              ))}
+            </div><button className="carousel-button right" onClick={nextSlide}>
+              &#10095;
+            </button></>
+        )
       )}
     </div>
   );

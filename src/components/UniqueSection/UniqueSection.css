@@ -1,14 +1,14 @@
 .unique-section {
   background-color: #000000;
   color: #f2f2f2;
-  padding: 40px;
+  padding: 50px;
   text-align: center;
 }
 
 .unique-section h2 {
   color: #AB572D;
-  margin-bottom: 40px;
-  font-size: 32px;
+  margin-bottom: 30px;
+  font-size: 3rem;
   font-weight: 500;
 }
 
@@ -28,13 +28,13 @@
 }
 
 .content-block h3 {
-  font-size: 20px;
+  font-size: 2rem;
   font-weight: 700;
   margin-bottom: 10px;
 }
 
 .content-block p {
-  font-size: 16px;
+  font-size: 1rem;
   font-weight: 100;
   line-height: 1.6;
 }
@@ -51,23 +51,41 @@
   margin-top: 20px;
 }
 
+@media (max-width: 1024px) {
+  .unique-section h2 {
+    font-size: 2.5rem;
+  }
+
+  .content-block h3 {
+    font-size: 1.6rem;
+  }
+}
 /* Tablet Styles */
 @media (max-width: 768px) {
+  .unique-section {
+    padding: 20px;
+  }
+
   .content-container {
     flex-direction: column;
     gap: 20px;
   }
 
   .unique-section h2 {
-    font-size: 28px;
+    font-size: 2rem;
+  }
+
+  .content-block {
+    flex: 1;
+    padding: 20px 0px;
   }
 
   .content-block h3 {
-    font-size: 18px;
+    font-size: 1.2rem;
   }
 
   .content-block p {
-    font-size: 15px;
+    padding: 0px 20px;
   }
 
   .closing-text, .closing-signature {
@@ -82,20 +100,16 @@
   }
 
   .unique-section h2 {
-    font-size: 24px;
+    font-size: 1.75;
     margin-bottom: 30px;
   }
 
-  .content-block {
-    padding: 15px;
-  }
-
   .content-block h3 {
-    font-size: 16px;
+    font-size: 1rem;
   }
 
   .content-block p {
-    font-size: 14px;
+    font-size: 0.8rem;
   }
 
   .closing-text, .closing-signature {

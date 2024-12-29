@@ -1,60 +1,115 @@
 .values-section {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0px;
-    background-color: #000000; /* Dark background */
-  }
-  
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px;
+  background-color: #000000;
+  /* Dark background */
+}
+
+.values-container {
+  justify-content: space-between;
+  margin-left: auto;
+  margin-right: auto;
+  align-items: center;
+  padding:50px;
+  color: white;
+}
+
+.image-container {
+  flex: 1;
+}
+
+.perfume-image {
+  max-width: 100%;
+  height: auto;
+}
+
+.text-container {
+  /* flex: 1; */
+  display: block;
+}
+
+.title {
+  font-size: 3rem;
+  font-weight: 400;
+  margin-bottom: 20px;
+  font-family: 'Your Desired Font', sans-serif;
+  /* Add the desired font */
+}
+
+.description {
+  font-size: 2rem;
+  line-height: 1.8;
+  margin-bottom: 15px;
+  color: #ccc;
+  /* Light gray text */
+}
+
+@media (min-width: 1450px) {
   .values-container {
     display: flex;
-    justify-content: space-between;
-    margin-left: auto;
-    margin-right: auto;
-    align-items: center;
-    width: 80%; /* Adjust width as per your layout */
-    color: white;
   }
-  
-  .image-container {
-    flex: 1;
-  }
-  
-  .perfume-image {
-    max-width: 100%;
-    height: auto;
-  }
-  
+
   .text-container {
-    flex: 1;
     padding-left: 40px;
   }
-  
+}
+
+@media (max-width: 1450px) {
+  .image-container {
+    padding-bottom: 40px;
+  }
+
   .title {
-    font-size: 36px;
-    margin-bottom: 20px;
-    font-family: 'Your Desired Font', sans-serif; /* Add the desired font */
+    text-align: center;
   }
-  
+}
+
+@media (max-width: 1024px) {
+  .title {
+    font-size: 2.5rem;
+  }
+
   .description {
-    font-size: 18px;
-    line-height: 1.8;
-    margin-bottom: 15px;
-    color: #ccc; /* Light gray text */
+    font-size: 1.8rem;
+    line-height: 1.5;
   }
-  
-  /* Adjustments for smaller screens */
-  @media (max-width: 768px) {
-    .values-container {
-      flex-direction: column;
-      text-align: center;
-    }
-  
-    .text-container {
-      padding-left: 0;
-    }
-  
-    .image-container {
-      margin-bottom: 30px;
-    }
+}
+
+/* Adjustments for smaller screens */
+@media (max-width: 768px) {
+  .title {
+    font-size: 2rem;
   }
+
+  .values-container {
+    flex-direction: column;
+    text-align: center;
+    padding: 50px 15px;
+  }
+
+  .text-container {
+    padding-left: 0;
+  }
+
+  .image-container {
+    margin-bottom: 30px;
+  }
+
+  .description {
+    font-size: 1.2rem;
+    line-height: 1.4;
+  }
+}
+
+@media (max-width: 480px) {
+  .title {
+    font-size: 1.75rem;
+  }
+
+  .description {
+    font-size: 0.8rem;
+    line-height: 1.3;
+  }
+}
