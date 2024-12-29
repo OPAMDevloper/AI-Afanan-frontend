@@ -1,0 +1,127 @@
+.otp-modal {
+    position: fixed;
+    z-index: 9999;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7); /* Slightly darker background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-x: hidden;
+    top: 0;
+}
+
+.otp-container {
+    width: min(90%, 400px); /* Better responsive handling */
+    color: #808080;
+    background-color: #121212; /* Darker background for better contrast */
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 30px;
+    border: 1px solid #444; /* Slightly lighter border */
+    border-radius: 10px;
+    font-size: 14px;
+    animation: fadeIn 0.5s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6); /* Subtle shadow */
+}
+
+.otp-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #fff;
+}
+
+.otp-header img {
+    width: 20px;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.otp-header img:hover {
+    transform: scale(1.1);
+}
+
+.otp-input-group {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.otp-input-box {
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    font-size: 18px;
+    color: #fff;
+    background-color: #1e1e1e; /* Consistent with the dark theme */
+    border: 1px solid #555;
+    border-radius: 8px;
+    transition: border-color 0.2s, background-color 0.2s;
+}
+
+.otp-input-box:focus {
+    border-color: #ff6347;
+    background-color: #2e2e2e;
+    outline: none;
+}
+
+.otp-submit-button {
+    border: none;
+    padding: 12px;
+    border-radius: 25px;
+    color: #fff;
+    background-color: #ff6347;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.otp-submit-button:hover {
+    background-color: #e5533d;
+}
+
+.otp-conditions {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-top: -10px;
+    font-size: 13px;
+    color: #ccc;
+}
+
+.otp-conditions input {
+    margin-top: 2px;
+    accent-color: #ff6347; /* Customize checkbox color */
+}
+
+.otp-footer {
+    text-align: center;
+    margin: 10px 0 0;
+    color: #ccc;
+    font-size: 14px;
+}
+
+.otp-footer .otp-login-link {
+    color: #ff6347;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.otp-footer .otp-login-link:hover {
+    color: #e5533d;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}

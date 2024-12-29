@@ -6,6 +6,7 @@ import axios from 'axios';
 import Loader from '../Loader/Loader';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Otp from '../otp/Otp';
 
 
 const Signup = () => {
@@ -13,6 +14,7 @@ const Signup = () => {
     const { url, setToken ,setShowSignup} = useContext(StoreContext);
     const [data, setData] = useState({ name: "", email: "", password: "" });
     const [loading, setLoading] = useState(false);
+    const [showotpmodal,setShowotpModal] = useState(true)
 
     const onChangeHandler = (event) => {
         const { name, value } = event.target;
@@ -22,6 +24,8 @@ const Signup = () => {
     const onLogin = async (event) => {
         event.preventDefault();
         const newUrl = `${url}/auth/${currentState === 'Login' ? 'login' : 'register'}`;
+        setShowotpModal(true);
+        return;
         setLoading(true);
         try {
             const response = await axios.post(newUrl, data, { withCredentials: true });
@@ -34,7 +38,7 @@ const Signup = () => {
                     setToken(AccessToken);
 
                     // Set token as a cookie with expiration of 7 days
-                    document.cookie = `token=${AccessToken}; path=/; max-age=${7 * 24 * 60 * 60}`;
+                    document.cookie = `token=${AccessToken}; path=/; max-age=${7 * 24 * 60 * 60};`;
                     console.log("Document cookie:", document.cookie);
 
                     setShowSignup(false); // Close signup modal after login
@@ -95,8 +99,9 @@ const Signup = () => {
             </form>
             
                   <ToastContainer />
+                 {showotpmodal &&  <Otp setShowotpModal={setShowotpModal}/>}
         </div>
     );
 };
 
-export default Signup;
+export default Signup;

@@ -4,7 +4,7 @@ import { Environment, OrbitControls } from '@react-three/drei';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-gsap.registerPlugin(ScrollTrigger);
+// gsap.registerPlugin(ScrollTrigger);
 
 const Scene = () => {
   const [isMobileOrTablet, setIsMobileOrTablet] = useState(false);
@@ -24,15 +24,15 @@ const Scene = () => {
   ];
 
   //Detect screen size changes
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobileOrTablet(window.innerWidth < 1026); // Adjust the width as needed for tablet/mobile
-    };
+  // useEffect(() => {
+  //   const handleResize = () => {
+  //     setIsMobileOrTablet(window.innerWidth < 1026); // Adjust the width as needed for tablet/mobile
+  //   };
 
-    handleResize(); // Call on component mount
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
+  //   handleResize(); // Call on component mount
+  //   window.addEventListener('resize', handleResize);
+  //   return () => window.removeEventListener('resize', handleResize);
+  // }, []);
 
   useEffect(() => {
     if (!model1Ref.current || !model2Ref.current) return;
@@ -56,7 +56,7 @@ const Scene = () => {
       defaults: { duration: 2 },
       scrollTrigger: {
         trigger: ".heroTwo-container",
-        pin: !isMobileOrTablet, // Disable pinning on mobile and tablet
+        pin: true, // Disable pinning on mobile and tablet
         start: "top top",
         end: "+=500",
         scrub: 2,
